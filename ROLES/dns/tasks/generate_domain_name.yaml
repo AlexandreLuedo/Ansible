@@ -1,0 +1,12 @@
+---
+- name: Ajouter / mettre à jour enregistrement A
+  community.general.nsupdate:
+    server: serv3
+    zone: "{{ zone_value }}"
+    record: "{{ record_value }}"
+    type: "A"
+    value: "{{ a_record_value }}"
+    ttl: "{{ ttl_value }}"
+    key_name: "ansible-tsig"
+    key_secret: "{{ tsig_key }}" # TODO Find the key_name, maybe remake a key
+...

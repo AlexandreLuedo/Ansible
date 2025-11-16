@@ -1,0 +1,13 @@
+---
+# For domain
+zone_value: none
+record_value: none
+type_value: none # A AAAA etc...
+a_record_value: none
+ttl: none
+
+# For subdomain
+main_domain_value: none # my.cloud
+sub_record_value: none
+sub_zone_value: none # Like 192.158.1.23
+...

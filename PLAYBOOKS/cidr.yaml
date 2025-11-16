@@ -1,0 +1,6 @@
+# https://docs.ansible.com/ansible/latest/collections/ansible/utils/ipaddr_filter.html
+#
+- name: Setup an specific CIDR (target is 32)
+  host: serv3
+- debug:
+    msg: "{{ ansible.utils.ipaddr }}"

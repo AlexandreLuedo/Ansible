@@ -1,0 +1,20 @@
+---
+- name: Installation & configuration of chrony
+  host: serv3
+  become: true
+  tasks:
+    - name: Install Chronyd
+      include_role:
+        name: install_package
+      vars:
+        apt_name: chrony
+    - name: verify that chrony config exist and haren't empty
+      stat:
+        path: /etc/chrony.conf
+        register: var_config
+    - debug:
+        msg: "The config file exist has /etc/chrony.conf"
+      when: var_config.stat.exists
+    - debug:
+        msg: "The file /etc/chrony.conf does not exists"
+      when: var_config.stat.exists == False

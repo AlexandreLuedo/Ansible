@@ -1,0 +1,10 @@
+---
+- name: Add or modify ansible.example.org A to 192.168.1.1"
+  community.general.nsupdate:
+    key_name: "ansible_key"
+    key_secret: "{{ tsig_key }}"
+    server: serv3
+    zone: "{{ main_domain_value }}"
+    record: "{{ sub_record_value }}"
+    value: "{{ sub_zone_value }}"
+...
