@@ -1,6 +1,6 @@
 #+title: Readme
 #+LANGUAGE:en
-#+begin_quote
+#+begin_warning
 I'm new to Ansible and all this server management stuff.
-#+end_quote
+#+end_warning
 * This repo store my main playbooks and inventories concerning Ansible.
