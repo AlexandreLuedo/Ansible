@@ -1,10 +1,7 @@
-#+title: Readme
+#+title: Ansible
 #+LANGUAGE:en
-#+begin_src md
-> [!WARNING]
-> I'm new to Ansible and all this server management stuff.
-#+end_src
-* This repo store my main playbooks and inventories concerning Ansible.
-#+BEGIN_WARNING
-test
-#+END_WARNING
+#+begin_quote
+⚠️ I'm new to Ansible and all this server management stuff.
+#+end_quote
+* Why ?
+This repo store my *playbooks* & *roles*.

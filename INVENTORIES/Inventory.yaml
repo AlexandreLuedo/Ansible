@@ -1,0 +1,26 @@
+---
+idrac:
+  hosts:
+    idrac_serv1:
+      ansible_host: 192.168.1.10
+    idrac_serv2:
+      ansible_host: 192.168.1.28
+    idrac_serv3:
+      ansible_host: 192.168.1.32
+homelab:
+  hosts:
+    serv1:
+      ansible_host: 192.168.1.12
+      ansible_user: umbrel
+production_server:
+  hosts:
+    serv2:
+      ansible_host: none # Il faudra t(rouver l'IP du serv
+    serv3:
+      ansible_host: 192.168.1.33
+      ansible_user: hadrien
+security:
+  hosts:
+    serv4:
+      ansible_host: none
+...
