@@ -1,6 +1,0 @@
-#+title: Architecture
-#+LANGUAGE:en
-#+AUTHOR:Hadrien Private
-
-* Role based (personnal notes)
-The most of modification made with Ansible must be made with roles. With an certain dose of practicity and rationnality.
