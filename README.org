@@ -1,7 +1,8 @@
 #+title: Ansible
 #+LANGUAGE:en
 #+begin_quote
+[!WARNING]
 ⚠️ I'm new to Ansible and all this server management stuff.
 #+end_quote
 * Why ?
-This repo store my *playbooks* & *roles*.
+This repo store my *playbooks* & *roles* for security reason. And also to invite some friends :)
