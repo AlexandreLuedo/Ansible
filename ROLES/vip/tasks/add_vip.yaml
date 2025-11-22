@@ -1,3 +1,9 @@
 ---
-
+- Name: Add a {{ ip_adress }} in {{ config_file_path }}.
+  ansible.builtin.lineinfile:
+    path: "{{ config_file_path }}"
+    line: "{{ ip_adress }}"
+    owner: root
+    group: root
+    mode: "0644"
 ...
