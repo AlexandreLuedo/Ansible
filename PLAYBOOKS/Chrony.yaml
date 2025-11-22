@@ -22,7 +22,7 @@
       when: var_config.stat.exists
     - debug:
         msg: "The file {{ chrony_path }} does not exists"
-      when: var_config.stat.exists == False
+      when: not var_config.stat.exists
 
     - name: Search {{ conf_name }} from the root
       ansible.builtin.find:
