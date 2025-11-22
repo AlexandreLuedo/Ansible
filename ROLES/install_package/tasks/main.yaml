@@ -1,5 +1,5 @@
 ---
-- Name: Install {{ apt_name }}
+- Name: Install "{{ apt_name }}"
   become: true
   apt:
     name: "{{ apt_name }}"
