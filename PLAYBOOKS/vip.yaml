@@ -1,0 +1,36 @@
+---
+- name: Adding an VIP ip
+  become: true
+  vars:
+    physical_interface: none # Put the physical interface by running $ ip link show
+    ip_adress: 192.168.1.45
+
+  roles:
+    - vip
+    - systemd
+
+  tasks:
+    - name: Start & enable systemctl service for the module
+      import_role:
+        name: vip
+        tasks_from: service_enable_started.yaml
+    - name: Create the config file, add the vip then restart the module
+      import_role:
+        name: vip
+        tasks_from: create_config
+    - name: Verify the status of {{ physical_interface }}
+      shell: networkctl status "{{ physical_interface }}"
+      register: network_status
+      changed_when: false
+
+    - name: Display Network status #Need to change for creating failed or not state
+    - debug:
+        msg: "The process exit with success !"
+      when: ip_adress == network.status.stdout
+    - debug:
+        mslg: "The process exit with failure :("
+      when: ip_adress != network.status.stdout
+
+
+
+...
