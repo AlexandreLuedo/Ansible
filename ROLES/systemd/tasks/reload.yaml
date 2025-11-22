@@ -1,0 +1,6 @@
+---
+- Name: Reload "{{ service_name }}" service
+  ansible.builtin.systemd_service:
+    name: "{{ service_name }}"
+    state: reload
+...
