@@ -1,0 +1,8 @@
+---
+- Name: Enable and start systemd-networkd
+  import_role:
+    name: systemd
+    tasks_from: start_enable.yaml
+  vars:
+    service_name: systemd-networkd
+...
