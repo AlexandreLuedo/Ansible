@@ -1,0 +1,14 @@
+# ----------------------------------------------
+# File generatore by Ansible – {{ ansible_date_time.iso8601 }}
+# ---------------------------------------------
+
+[Match]
+Name= {{ interface }}
+
+[Network]
+Addres= {{ ip_adress }}
+Gateway= {{ ip_gateway }}
+
+[Address]
+Adress= {{ virtual_adress }}
+IPForward=yes
