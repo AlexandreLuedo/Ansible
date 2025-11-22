@@ -4,4 +4,5 @@ interface: none #eg: eth0, required
 ip_adress: none # Required
 gateway: 192.168.1.1 # By default
 virtual_adress: none # Required
+conf_file_path: /etc/systemd/network/25-wired.network
 ...
