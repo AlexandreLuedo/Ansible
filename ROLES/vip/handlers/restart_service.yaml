@@ -1,0 +1,9 @@
+---
+- name: Restart "{{ networkd }}"
+  listen: "restart {{ networkd }} service"
+  import_role:
+    name: systemd
+    tasks_from: restart.yaml
+    vars:
+      name: "{{ networkd }}"
+...
