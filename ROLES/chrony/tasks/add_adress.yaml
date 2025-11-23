@@ -1,0 +1,3 @@
+---
+- name: Add an ip adress to the ntp config file to act like a ntp server
+...
