@@ -1,3 +1,8 @@
 ---
 - name: Add an ip adress to the ntp config file to act like a ntp server
+  tasks:
+    ansible.builtin.lineinfile:
+      path: "{{ chrony_config_path }}"
+      line: allow "{{ ip_adress }}"
+      # Can bug here because the rights are not set
 ...
