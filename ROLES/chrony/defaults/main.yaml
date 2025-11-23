@@ -1,3 +1,4 @@
 ---
 ip_adress: none # required
+chrony_config_path: /etc/chrony.conf
 ...
