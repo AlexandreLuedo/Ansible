@@ -13,7 +13,7 @@
     - name: Start & enable systemctl service for the module
       import_role:
         name: vip
-        tasks_from: service_enable_started.yaml
+        tasks_from: service_enable_started
     - name: Create the config file, add the vip then restart the module
       import_role:
         name: vip
