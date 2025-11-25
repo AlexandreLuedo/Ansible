@@ -1,0 +1,6 @@
+---
+- name: Link "{{ vip_ip_adress }}" to open the server NTP port
+  include_role:
+    name: vip
+    tasks_from: add_vip
+...
