@@ -1,0 +1,17 @@
+#----------------------------------------------
+# File generatore by Ansible – {{ ansible_date_time.iso8601 }}
+# ---------------------------------------------
+
+# Proposed by Gemini
+{%for server in chrony_server%}
+  server {{ server }} iburst
+{%endfor%}
+
+logdir /var/log/chrony
+
+# Proposed by Gemini
+{%if chornyu_allow_subnet is defined and chrony_allow_subnet|lenght > 0%}
+  {%for subnet in chrony_allow_subnet%}
+    allow{{ subnet }}
+  {%endfor%}
+{%endif%}
