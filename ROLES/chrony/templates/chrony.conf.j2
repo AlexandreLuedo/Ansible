@@ -3,8 +3,8 @@
 # ---------------------------------------------
 
 {# Proposed by Gemini #}
-{% for server in chrony_server %}
-  server {{ server }} iburst
+{% for server in vip_adress %}
+  server {{ vip_adress }} iburst
 {% endfor %}
 
 {# My own code #}
