@@ -5,4 +5,4 @@
 I'm new to Ansible and all this server management stuff.
 #+end_quote
 * Why ?
-This repo store my *playbooks* & *roles* for security reason. And also to invite some friends :)
+This repo store my *playbooks* & *roles* for security reason. And also to invite some friends :) to show off my progression.
