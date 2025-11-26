@@ -1,0 +1,15 @@
+---
+- name: Download, configure and deploy nfs using the nfs kernel
+  hosts: serv3
+  become: true
+  vars:
+    module: nfs-kernel-server
+  tasks:
+    - name: Install {{ nfs-kernel-server }}
+      import_role: 
+        name: install_package
+        vars:
+          apt_name: "{{ nfs-kernel-server }}"
+
+  
+...
