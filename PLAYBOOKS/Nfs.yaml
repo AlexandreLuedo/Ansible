@@ -1,9 +1,16 @@
 ---
-- name: Download, configure and deploy nfs using the nfs kernel
+- name: Download, configure and deploy nfs using the nfs kernel (server side)
   hosts: serv3
   become: true
   vars:
     module: nfs-kernel-server
+    vip_ip_adress: 192.168.1.41/24 # I prefer when I set tasks here
+    shared_folder: serv3shared
+    allowed_devices:
+      - {{ omarchy_pc }}
+      - {{ omarchy_tablet }}
+      - {{ pave_pro }}
+
   tasks:
     - name: Install {{ nfs-kernel-server }}
       import_role: 
