@@ -23,4 +23,12 @@ security:
   hosts:
     serv4:
       ansible_host: none
+pc:
+  hosts:
+    omarchy_pc:
+      ansible_host: 192.168.1.38/24
+    omarchy_tablet:
+      ansible_host: 192.168.1.36/24
+    pave_pro:
+      ansible_host: 192.168.1.13/24
 ...
