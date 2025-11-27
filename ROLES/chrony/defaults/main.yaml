@@ -1,4 +1,5 @@
 ---
-ip_adress: none # required
-chrony_config_path: /etc/chrony.conf
+pool_ntp_server: none           # Required
+vip_ip_adress: none             # Required
+chrony_config_path: /etc/chrony.conf  
 ...

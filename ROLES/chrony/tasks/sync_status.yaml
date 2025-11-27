@@ -1,0 +1,5 @@
+---
+- name: Display sync status
+  ansible.builtin.debug:
+    var: chrony_status.stdout_lines
+...
