@@ -18,7 +18,7 @@
         path: "{{ chrony_path }}"
       register: var_config
     - debug:
-        msg: "The config file exist has {{ chrony_path }}"
+        msg: "The config file exist as {{ chrony_path }}"
       when: var_config.stat.exists
     - debug:
         msg: "The file {{ chrony_path }} does not exists"
@@ -38,6 +38,11 @@
       line: "{{ pool }}"
       when: not var_config.stat.exists
 
+    - name: Create a vip for chrony
+      import_role:
+        name: vip
+        import_tasks:
+          
     - name: Add the pool for the /etc/chrony.conf
       ansible.builtin/ineinfile:
         path: "{{ chrony_path }}"
