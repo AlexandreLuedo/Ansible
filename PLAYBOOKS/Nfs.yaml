@@ -18,5 +18,25 @@
         vars:
           apt_name: "{{ nfs-kernel-server }}"
 
+    - name: create {{ shared_folder }} folder and approriate access and permission
+      ansible.builtin.file:
+        path: "/nfs/exports/{{ shared_folder }}"
+        owner: root
+        group: root
+        mode: 775
+        state: create
+
+    - name: create {{ vip_ip_adress }} as a vip
+      import_role:
+        name: vip
+        vars:
+          ip_adress: "{{ vip_ip_adress }}"
+        tasks_from: add_vip
+
+    - name: Allow client 
+      ansible.builtin.lineinfile:
+        path: /etc/exports
+        line: "{% for devices in allowed_devices %}/serv/nfs/{{ shared_folder }} {{ allowed_devices }}(rw,sync,no_subtree_check) {% endfor %}"
   
+    - name: Applied 
 ...
