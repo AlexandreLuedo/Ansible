@@ -6,7 +6,6 @@
     ip_adress: 192.168.1.45
 
   roles:
-    - vip
     - systemd
 
   tasks:
