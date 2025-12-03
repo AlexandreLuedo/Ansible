@@ -1,0 +1,6 @@
+---
+- name: Create PKI architecture certificates
+  hosts:
+  var:
+  tasks:
+    - name: Verify if OpenSSL 3 or higher is installed, if not installe it
