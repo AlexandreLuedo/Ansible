@@ -1,2 +1,9 @@
 ---
 beginning_path: none            # Required
+project_folder: ca              
+root_ca_folder: root-ca
+root_ca_public_folder: public
+root_ca_private_folder: private
+storage_path: storage           # It can be a database, or something else
+crl_folder: crl                 # Considering keeping that like it is
+certs_folder: certs
