@@ -1,5 +1,8 @@
 ---
 - name: Deploy the corresponding config file
   ansible.builtin.template:
-    src: {{ config_name }}
-    dest: {{ config_destination }}
+    src: "{{ config_name }}.j2"
+    dest: {{ ca_config_path }}
+    owner: root
+    group: root
+    mode: '0644'
