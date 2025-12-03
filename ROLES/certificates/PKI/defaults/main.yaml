@@ -14,4 +14,9 @@ privatekey_path: "{{ project_folder }}/{{ root_ca_folder }}/{{ root_ca_private_f
 ca_config_path: "{{ project_folder }}/config"
 
 # Configs 
-config_name: none               # Required, used in include_template.yaml, use without .j2 extension name
+config_name: example.conf               # Required, used in include_template.yaml
+
+# DNS & IPs
+dns_list: none                  # Required
+ip_list: none                   # Required
+...
