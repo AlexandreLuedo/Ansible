@@ -1,0 +1,5 @@
+---
+- name: Deploy the corresponding config file
+  ansible.builtin.template:
+    src: {{ config_name }}
+    dest: {{ config_destination }}
