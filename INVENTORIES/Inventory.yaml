@@ -23,4 +23,8 @@ security:
   hosts:
     serv4:
       ansible_host: none
+printer:
+  hosts:
+    envy:
+      ansible_host: 192.168.1.35
 ...
