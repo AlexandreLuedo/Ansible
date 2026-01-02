@@ -15,14 +15,14 @@ homelab:
 production_server:
   hosts:
     serv2:
-      ansible_host: none
+      ansible_host: 192.168.1.XX
     serv3:
       ansible_host: 192.168.1.43
       ansible_user: hadrien
 security:
   hosts:
     serv4:
-      ansible_host: none
+      ansible_host: 192.168.1.XX
 printer:
   hosts:
     envy:
