@@ -1,0 +1,9 @@
+---
+- name: Deploy pdns.conf
+  ansible.builtin.template:
+    src: pdns.conf.j2
+    dest: "{{ pdns_path }}/pdns.conf"
+    owner: "{{ user_id }}"
+    group: "{{ group_id }}"
+    mode: "{{ access }}"
+...
