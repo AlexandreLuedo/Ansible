@@ -1,8 +1,8 @@
 ---
 # Doc in meta/argument_specs.yaml
 ttl: 60
-domains:                         
-# domain_name: "{{ domains }}.cloud" 
+domains:
+# domain_name: "{{ domains }}.cloud"
 bind_config_name: bind
 
 pdns_path: /etc/powerdns
