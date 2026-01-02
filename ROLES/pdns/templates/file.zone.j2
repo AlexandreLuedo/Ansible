@@ -15,5 +15,5 @@ ns1 IN A {{ ansible_host }}
 
 {# Records #}
 {% for host in groups[current_domain] %}
-  {{ host | replace('idrac_', '')}} IN A {{ hostvars[host]['ansible_host'] }}
+{{ host | replace('idrac_', '')}} IN A {{ hostvars[host]['ansible_host'] }}
 {% endfor %}
