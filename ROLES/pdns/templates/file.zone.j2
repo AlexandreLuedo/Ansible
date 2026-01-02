@@ -10,6 +10,7 @@ $TTL {{ ttl }}
 )
 
 @ IN NS ns1.{{ current_domain }}.cloud.
+@ IN A {{ ansible_host }}
 ns1 IN A {{ ansible_host }}
 
 {# Records #}
