@@ -1,5 +1,5 @@
 {# SOA - Start of authority #}
-$ORIGIN {{ current_domain }}
+$ORIGIN {{ current_domain }}.cloud.
 $TTL {{ ttl }}
 @ IN SOA ns1.{{ current_domain }}.cloud. admin.{{ current_domain }}.cloud. (
 {{ ansible_date_time.date | replace('-', '') }}01 {# Serial #}
