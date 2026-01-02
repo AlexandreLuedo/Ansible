@@ -6,7 +6,7 @@ idrac:
     idrac_serv2:
       ansible_host: 192.168.1.28
     idrac_serv3:
-      ansible_host: 192.168.1.32
+      ansible_host: 192.168.1.33
 homelab:
   hosts:
     serv1:
@@ -15,9 +15,9 @@ homelab:
 production_server:
   hosts:
     serv2:
-      ansible_host: none # Il faudra t(rouver l'IP du serv
+      ansible_host: none
     serv3:
-      ansible_host: 192.168.1.33
+      ansible_host: 192.168.1.43
       ansible_user: hadrien
 security:
   hosts:
@@ -26,5 +26,5 @@ security:
 printer:
   hosts:
     envy:
-      ansible_host: 192.168.1.35
+      ansible_host: 192.168.1.25
 ...
