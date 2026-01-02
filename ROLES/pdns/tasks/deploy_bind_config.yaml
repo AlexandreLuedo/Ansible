@@ -1,0 +1,9 @@
+---
+- name: Deploy {{ bind_config_name }}.conf zone file
+  ansible.builtin.template:
+    src: bind.conf.j2
+    dest: "{{ pdns_path }}/{{ bind_config_name }}.conf"
+    owner: "{{ user_id }}"
+    group: "{{ group_id }}"
+    mode: "{{ access }}"
+...

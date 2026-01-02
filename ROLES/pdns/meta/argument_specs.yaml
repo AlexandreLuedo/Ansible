@@ -1,0 +1,61 @@
+---
+argument_specs:
+  main:
+    short_description: "Dynamic PowerDNS / Bind configuration role."
+    description: >
+      This role generates DNS zone files and configurations based on 
+      a list of domains. Each domain must strictly match a group name 
+      defined in the inventory.
+    options:
+      ttl:
+        type: "int"
+        default: 60
+        description: "Default Time To Live (TTL) for DNS records."
+
+      domains:
+        type: "list"
+        elements: "str"
+        required: true
+        description: >
+          List of domains to process. Important: Each entry must 
+          exactly match a host group in the inventory (e.g., idrac, main).
+
+      bind_config_name:
+        type: "str"
+        default: "bind"
+        description: "Base name for the primary configuration file."
+
+      pdns_path:
+        type: "path"
+        default: "/etc/powerdns"
+        description: "Directory path where zone files and configs will be stored."
+
+      local_address:
+        type: "str"
+        default: "0.0.0.0"
+        description: "Local IP address for the DNS service to bind to."
+
+      user_id:
+        type: "str"
+        default: "pdns"
+        description: "User owner for the generated files."
+
+      group_id:
+        type: "str"
+        default: "pdns"
+        description: "Group owner for the generated files."
+
+      access:
+        type: "str"
+        default: "0640"
+        description: "File permissions mode (e.g., '0640')."
+
+      is_primary:
+        type: "bool"
+        default: true
+        description: "Whether the server acts as the primary (master) DNS."
+
+      is_secondary:
+        type: "str"
+        default: "none"
+        description: "Secondary (slave) configuration or master server IP."

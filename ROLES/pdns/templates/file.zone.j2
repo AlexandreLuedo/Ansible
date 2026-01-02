@@ -1,0 +1,18 @@
+{# SOA - Start of authority #}
+$ORIGIN {{ current_domain }}
+$TTL {{ ttl }}
+@ IN SOA ns1.{{ current_domain }}.cloud. admin.{{ current_domain }}.cloud. (
+{{ ansible_date_time.date | replace('-', '') }}01 {# Serial #}
+100                                               {# Refresh #}
+30                                                {# Retry #}
+2419200                                           {# Expire #}
+600                                              {# Minimum TTL #}
+)
+
+@ IN NS ns1.{{ current_domain }}.cloud.
+ns1 IN A {{ ansible_host }}
+
+{# Records #}
+{% for host in groups[current_domain] %}
+  {{ host | replace('idrac_', '')}} IN A {{ hostvars[host]['ansible_host'] }}
+{% endfor %}
