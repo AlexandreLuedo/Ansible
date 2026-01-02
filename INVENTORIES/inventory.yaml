@@ -23,8 +23,30 @@ security:
   hosts:
     serv4:
       ansible_host: 192.168.1.XX
+
 printer:
   hosts:
     envy:
       ansible_host: 192.168.1.25
+main:
+  hosts:
+    nextcloud:
+      ansible_host: 10.1.0.1
+    immich:
+      ansible_host: 10.1.0.2
+    forgejo:
+      ansible_host: 10.1.0.3
+side:
+  hosts:
+    ganache.lab:
+      ansible_host: 10.1.1.1
+test:
+  hosts:
+    kubernetes:
+      ansible_host: 10.1.2.1
+umbrel:
+  hosts:
+    umbrel_nextcloud:
+      ansible_host: "{{ serv3 }}:8081"
+    
 ...
