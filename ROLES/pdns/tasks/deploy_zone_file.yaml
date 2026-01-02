@@ -1,5 +1,5 @@
 ---
-- name: "Deploy {{ current_domain }} zone file"
+- name: "Deploy {{ domains }} zone file"
   ansible.builtin.template:
     src: file.zone.j2
     dest: "{{ pdns_path }}/{{ current_domain }}.zone"
