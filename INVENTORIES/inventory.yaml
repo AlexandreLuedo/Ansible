@@ -12,12 +12,12 @@ homelab:
     serv1:
       ansible_host: 192.168.1.12
       ansible_user: umbrel
-production_server:
+server:
   hosts:
     serv2:
       ansible_host: 192.168.1.XX
     serv3:
-      ansible_host: 192.168.1.43
+      ansible_host: 192.168.1.83
       ansible_user: hadrien
 security:
   hosts:
@@ -26,7 +26,7 @@ security:
 
 printer:
   hosts:
-    envy:
+    HPD1BD80:
       ansible_host: 192.168.1.25
 main:
   hosts:
@@ -48,5 +48,4 @@ umbrel:
   hosts:
     umbrel_nextcloud:
       ansible_host: "{{ serv3 }}:8081"
-    
 ...
