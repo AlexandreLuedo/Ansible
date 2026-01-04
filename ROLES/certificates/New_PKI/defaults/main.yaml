@@ -1,4 +1,6 @@
 ---
+organization_name: none
+organization_unit_name: none
 current_domain: "{{ domains }}.cloud"
 domains:
   - domain1
