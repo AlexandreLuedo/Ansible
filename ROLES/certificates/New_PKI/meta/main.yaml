@@ -5,4 +5,20 @@ platforms:
   - name: Debian
     versions:
       - trixie
+
+# -------------------------------------------------------------------------
+# PKI Certificate Authority Policy Documentation
+# -------------------------------------------------------------------------
+# This role follows specific OpenSSL CA policies for signing CSRs. 
+# Understanding these keywords is essential for valid certificate issuance:
+#
+# match    : The field value in the CSR must exactly match the value in the 
+#            Root CA certificate (e.g., CountryName or OrganizationName).
+#
+# supplied : The field must be present in the CSR (it cannot be empty), 
+#            but the specific value does not need to match the CA.
+#
+# optional : The field may or may not be present in the CSR. If it's 
+#            missing, the CA will sign the certificate anyway.
+# -------------------------------------------------------------------------
 ...
