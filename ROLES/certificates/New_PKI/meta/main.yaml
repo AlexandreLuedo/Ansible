@@ -1,0 +1,8 @@
+---
+galaxy_info:
+  author: Alexandre Luedo
+platforms:
+  - name: Debian
+    versions:
+      - trixie
+...
