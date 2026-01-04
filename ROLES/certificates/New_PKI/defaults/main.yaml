@@ -1,5 +1,5 @@
 ---
-email_adress: admin.{{ current_domain }}
+email_address: admin.{{ current_domain }}
 organization_name: none
 organization_unit_name: none
 base_url: none
