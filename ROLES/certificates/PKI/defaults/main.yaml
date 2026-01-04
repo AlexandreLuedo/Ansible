@@ -1,6 +1,10 @@
 ---
 # Folders
+<<<<<<< HEAD
 project_folder: ca              
+=======
+project_folder: ca
+>>>>>>> cbe8eaa (feat: stag changes)
 root_ca_folder: root-ca         # Also used for root .csr & .key name
 root_ca_public_folder: public
 root_ca_private_folder: private
@@ -13,10 +17,10 @@ csr_path: "{{ project_folder }}/{{ root_ca_folder }}.csr"
 privatekey_path: "{{ project_folder }}/{{ root_ca_folder }}/{{ root_ca_private_folder }}"
 ca_config_path: "{{ project_folder }}/config"
 
-# Configs 
-config_name: example.conf               # Required, used in include_template.yaml
+# Configs
+config_name: certificates.conf               # Required, used in include_template.yaml
 
 # DNS & IPs
-dns_list: none                  # Required
-ip_list: none                   # Required
+dns_list:
+  - serv1.idrac.cloud # Required
 ...
