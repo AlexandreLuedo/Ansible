@@ -21,9 +21,9 @@ req_extensions          = ca_reqext             # Desired extensions
 
 [ ca_dn ]
 countryName             = "NO"
-organizationName        = "{{ organisation_name }}"
-organizationalUnitName  = "iDRAC Certificate Authority"
-commonName              = "iDRAC Root CA"
+organizationName        = "{{ organization_name }}"
+organizationalUnitName  = "{{ organization_name_unit }}"
+commonName              = "{{ organization_name }}"
 
 [ ca_reqext ]
 keyUsage                = critical,keyCertSign,cRLSign
