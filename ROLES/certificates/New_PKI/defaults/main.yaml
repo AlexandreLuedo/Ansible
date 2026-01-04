@@ -1,0 +1,6 @@
+---
+current_domain: "{{ domains }}.cloud"
+domains:
+  - domain1
+  - domain2
+...
