@@ -60,7 +60,7 @@ crl_extensions          = crl_ext               # CRL extensions
 countryName             = match                 # Must match 'NO'
 stateOrProvinceName     = optional              # Included if present
 localityName            = optional              # Included if present
-organizationName        = match                 # Must match 'Green AS'
+organizationName        = match                 # Must match '{{ organization_name }}'
 organizationalUnitName  = optional              # Included if present
 commonName              = supplied              # Must be present
 
