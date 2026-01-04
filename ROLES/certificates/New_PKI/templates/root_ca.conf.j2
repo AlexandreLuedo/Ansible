@@ -12,7 +12,9 @@ aia_url                 = $base_url/$ca.cer     # CA certificate URL
 crl_url                 = $base_url/$ca.crl     # CRL distribution point
 
 # CA certificate request
-[ req ] default_bits            = 2048                  # RSA key size encrypt_key             = yes                   # Protect private key
+
+default_bits            = 2048                  # RSA key size
+encrypt_key             = yes                   # Protect private key
 default_md              = sha256                # MD to use
 utf8                    = yes                   # Input is UTF-8
 string_mask             = utf8only              # Emit UTF-8 strings
