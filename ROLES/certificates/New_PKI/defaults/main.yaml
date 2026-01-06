@@ -1,8 +1,10 @@
 ---
+# Organization infos
 email_address: admin.{{ current_domain }}
 organization_name: none
 organization_unit_name: none
-base_url: none
+country_name: FR
+
 current_domain: "{{ domains }}.cloud"
 domains:                        # Same variable as pdns role
   - domain1
