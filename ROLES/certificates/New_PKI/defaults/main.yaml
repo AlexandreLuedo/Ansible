@@ -7,4 +7,5 @@ current_domain: "{{ domains }}.cloud"
 domains:                        # Same variable as pdns role
   - domain1
   - domain2
+pki_web_root: "/var/www/pki"
 ...
