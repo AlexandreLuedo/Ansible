@@ -52,7 +52,7 @@
     privatekey_passphrase: "I dont know if i change you"  # TODO Create also an issue 
 
     digest: sha256
-    
+
     issuer:
       CN: "{{ organization_name }}"
       O: "{{ organization_name }}"
