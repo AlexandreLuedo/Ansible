@@ -1,0 +1,6 @@
+---
+- name: Deploy the root-ca config
+
+- name: setup the root-ca using the template above
+  community.
+...
