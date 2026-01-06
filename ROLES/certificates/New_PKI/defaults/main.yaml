@@ -8,4 +8,21 @@ domains:                        # Same variable as pdns role
   - domain1
   - domain2
 pki_web_root: "/var/www/pki"
+
+# Folders
+pki_path: /root/pki
+pki_dirs:
+  - path: "{{ pki_path}}/ca"
+  - path: "{{ pki_path }}/certs"
+  - path: "{{ pki_path }}/crl"
+
+  - path: "{{ pki_path}}/ca/root-ca"
+  - path: "{{ pki_path}}/ca/tls-ca"
+
+  - path: "{{ pki_path }}/ca/root-ca/private"
+    mode: '0700'
+  - path: "{{ pki_path }}/ca/root-ca/db"
+  - path: "{{ pki_path }}/ca/tls-ca/db"
+  - path: "{{ pki_path }}/ca/tls-ca/private"
+    mode: '0700'
 ...
