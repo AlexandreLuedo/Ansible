@@ -3,11 +3,20 @@
   ansible.builtin.template:
     src: templates/
 
+- name: Generating private key
+  community.crypto.openssl_privatekey:
+    paths: "{{ pki_path }}/ca/root-ca/private/root-ca.key"
+    size: 2048
+    type: RSA
+    cipher: auto
+    passphrase: "I don't know if i change you" # TODO Create an issue
+    mode: '0600'
+
 - name: Generating CSR for Root-CA
   community.crypto.openssl_csr:
     path: "{{ pki_path }}/ca/root-ca.csr"
     privatekey_path: "{{ pki_path }}/ca/root-ca/private/root-ca.key"
-    privatekey_passphrase: "I dont know if i change you" # TODO Create an issue 
+    privatekey_passphrase: "I dont know if i change you" # TODO Create also an issue 
 
     common_name: "{{ organization_name }}"
     country_name: "{{ contry_name }}"
