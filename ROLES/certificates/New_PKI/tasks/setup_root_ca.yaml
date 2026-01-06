@@ -1,19 +1,14 @@
 ---
-PLEASE VERIFY PATHS
-- name: Deploy the root-ca config
-  ansible.builtin.template:
-    src: templates/
-
 - name: Generating private key
   community.crypto.openssl_privatekey:
-    paths: "{{ pki_path }}/ca/root-ca/private/root-ca.key"
+    path: "{{ pki_path }}/ca/root-ca/private/root-ca.key"
     size: 4096  # More longer because it's during 10 years
     type: RSA
     cipher: auto
     passphrase: "I don't know if i change you"  # TODO Create an issue
     mode: '0600'
 
-- name: Generating CSR for Root-CA
+- name: Generating CSR
   community.crypto.openssl_csr:
     path: "{{ pki_path }}/ca/root-ca.csr"
     privatekey_path: "{{ pki_path }}/ca/root-ca/private/root-ca.key"
@@ -22,7 +17,7 @@ PLEASE VERIFY PATHS
     common_name: "{{ organization_name }}"
     country_name: "{{ contry_name }}"
     organization_name: "{{ organization_name }}"
-    organisation_unit_name: "{{ organisation_unit_name }}"
+    organization_unit_name: "{{ organization_unit_name }}"
 
     basic_constraints: "CA:TRUE"
     basic_constraints_critical: true
@@ -32,10 +27,11 @@ PLEASE VERIFY PATHS
     key_usage_critical: true
     create_subject_key_identifier: true
 
-- name: Generate self-signed Root-CA
+- name: Generate self-signed
   community.crypto.x509_certificate:
     path: "{{ pki_path }}/ca/root-ca.crt"
     privatekey_path: "{{ pki_path }}/ca/root-ca/private/root-ca.key"
+    privatekey_passphrase: "I dont know if i change you"  # TODO Create also an issue 
     csr_path: "{{ pki_path }}/ca/root-ca.csr"
     provider: selfsigned
     selfsigned_not_after: "+3650d"  # 10 years
@@ -49,9 +45,9 @@ PLEASE VERIFY PATHS
       - "CA:TRUE"
 
 - name: Generate initial CRL
-  community.crypto.x508_crl:
+  community.crypto.x509_crl:
     path: "{{ pki_path }}/ca/crl/root-ca.crl"
-    privatekey_path: "{{ pki_root_ca_dir }}/ca/root-ca/private/root-ca.key"
+    privatekey_path: "{{ pki_path }}/ca/root-ca/private/root-ca.key"
 
     privatekey_passphrase: "I dont know if i change you"  # TODO Create also an issue 
 
