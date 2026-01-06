@@ -1,0 +1,6 @@
+---
+# Example loop to use after.
+- name: Loop the deployment of tls-server-ca.conf file
+  include_tasks: 
+  loop: "{{ domains }}"
+...
