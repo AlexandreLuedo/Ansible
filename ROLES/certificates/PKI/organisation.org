@@ -12,6 +12,9 @@ organisation_name:              # Ce sont des groupes dans l'inventaire
 3. Générer la config signing CA avec =organisation_name=
 4. Générer la config tls CA avec =organisation_name=
 5. Générer des certificats en utilisant les hosts des groups stockés dans =organisation_name=
+
+
+Il va y avoir toute une partie "deploy" dans les tasks pour déployer les configurations. Puis il y aura une seconde partie "setup", qui effectuera des actions à l'aide d'un fichier de configuration (qui aura été déployé).
 6. Tasks pour faire l'organisation des folders
 7. Tasks pour générer un root-ca en utilisant la template et en bouclant avec =organisation_name=
 8. Tasks pour générer un signing-ca (pareil qu'au dessus)
