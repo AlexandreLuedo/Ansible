@@ -1,0 +1,4 @@
+---
+- name: "Setup of PKI distribution server"
+  become: yes
+...
