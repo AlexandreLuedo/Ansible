@@ -1,0 +1,4 @@
+---
+- name: generate certificate using the tls-ca
+# Grab the openssl community package and put them here
+...
