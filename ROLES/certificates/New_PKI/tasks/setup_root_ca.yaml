@@ -1,6 +1,24 @@
 ---
 - name: Deploy the root-ca config
+  ansible.builtin.template:
+    src: templates/
 
-- name: setup the root-ca using the template above
-  community.
+- name: Generating CSR for Root-CA
+  community.crypto.openssl_csr:
+    path: "{{ pki_path }}/ca/root-ca.csr"
+    privatekey_path: "{{ pki_path }}/ca/root-ca/private/root-ca.key"
+    privatekey_passphrase: "I dont know if i change you" # TODO Create an issue 
+
+    common_name: "{{ organization_name }}"
+    country_name: "{{ contry_name }}"
+    organization_name: "{{ organization_name }}"
+    organisation_unit_name: "{{ organisation_unit_name }}"
+
+    basic_constraints: "CA:TRUE"
+    basic_constraints_critical: true
+    key_usage:
+      - keyCertSign
+      - cRLSign
+    key_usage_critical: true
+    create_subject_key_identifier: yes
 ...
