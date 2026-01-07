@@ -53,5 +53,4 @@
       O: "{{ organization_name }}"
       OU: "{{ organization_unit_name }}"
       C: "{{ country_name }}"
-
 ...
