@@ -5,12 +5,17 @@ organization_name: none
 organization_unit_name: none
 country_name: FR
 
+# Domains
 current_domain: "{{ domains }}.cloud"
 domains:                        # Same variable as pdns role
   - domain1
   - domain2
 pki_web_root: "/var/www/pki"
 
+# Key infos
+key_size: 4096
+key_type: RSA
+key_mode: 0600
 # Folders
 pki_path: /root/pki
 pki_dirs:
