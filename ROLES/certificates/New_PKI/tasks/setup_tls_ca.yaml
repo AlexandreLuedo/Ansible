@@ -9,7 +9,7 @@
     privatekey_passphrase: "I dont know if i change you"  # TODO Create also an issue 
 
     common_name: "{{ organization_name }}"
-    country_name: "{{ contry_name }}"
+    country_name: "{{ country_name }}"
     organization_name: "{{ organization_name }}"
     organization_unit_name: "{{ organization_unit_name }}"
 
@@ -34,7 +34,7 @@
     basic_constraints:
       - "CA:TRUE"
 
-- name: Generate tsl-ca CRL
+- name: Generate tls-ca CRL
   community.crypto.x509_crl:
     path: "{{ pki_path }}/ca/crl/tls-ca.crl"
     privatekey_path: "{{ pki_path }}/ca/tls-ca/private/tls-ca.key"
