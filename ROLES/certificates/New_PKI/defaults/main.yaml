@@ -16,6 +16,10 @@ pki_web_root: "/var/www/pki"
 key_size: 4096
 key_type: RSA
 key_mode: 0600
+key_usage:
+  - keyCertSign
+  - cRLSign
+
 # Folders
 pki_path: /root/pki
 pki_dirs:
