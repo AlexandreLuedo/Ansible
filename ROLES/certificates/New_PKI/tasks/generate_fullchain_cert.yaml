@@ -1,0 +1,5 @@
+---
+- name: Generate fullchain certs for handling all pki chain of trust
+  community.crypto.certificate_complete_chain:
+
+...
