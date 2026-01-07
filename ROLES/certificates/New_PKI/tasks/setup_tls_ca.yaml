@@ -2,4 +2,35 @@
 # Twos things for the CSR :
 # - Go to gen a new private key and public for the tls
 # - Use root-ca key
+- name: Generating CSR
+  community.crypto.openssl_csr:
+    path: "{{ pki_path }}/ca/tls-ca.csr"
+    privatekey_path: "{{ pki_path }}/ca/tls-ca/private/tls-ca.key"
+    privatekey_passphrase: "I dont know if i change you"  # TODO Create also an issue 
+
+    common_name: "{{ organization_name }}"
+    country_name: "{{ contry_name }}"
+    organization_name: "{{ organization_name }}"
+    organization_unit_name: "{{ organization_unit_name }}"
+
+    basic_constraints: "CA:TRUE"
+    basic_constraints_critical: true
+    key_usage:
+      - keyCertSign
+      - cRLSign
+    key_usage_critical: true
+    create_subject_key_identifier: true
+
+- name: Generating the tls-ca.crt
+  community.crypto.x509_certificate:
+    path: "{{ pki_path }}/ca/tls-ca/tls-ca.crt"
+    ownca_path: "{{ pki_path }}/ca/root-ca/root-ca.crt"
+    ownca_privatekey_path: "{{ pki_path }}/ca/root-ca/private/root-ca.key"
+    csr_path: "{{ pki_path }}/ca/tls-ca.csr"
+    provider: ownca
+    key_usage:
+      - keyCertSign
+      - cRLSign
+    basic_constraints:
+      - "CA:TRUE"
 ...
