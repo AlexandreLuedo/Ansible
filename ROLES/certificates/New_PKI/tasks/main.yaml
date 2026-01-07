@@ -1,7 +1,3 @@
 ---
 # Setup certs with looping the setup-certs.yaml task
-- name: Loop the deployment of certs using deployed config files
-  include_tasks: setup_certs.yaml
-  loop: "{{ domains }}"
-  loop_vars: "{{ current_domain }}"
 ...
