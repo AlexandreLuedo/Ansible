@@ -44,7 +44,7 @@
     path: "{{ pki_path }}/ca/crl/tls-ca.crl"
     privatekey_path: "{{ pki_path }}/ca/tls-ca/private/tls-ca.key"
 
-    privatekey_passphrase: "I dont know if i change you"  # TODO Create also an issue 
+    privatekey_passphrase: "I dont know"
 
     digest: sha256
 
