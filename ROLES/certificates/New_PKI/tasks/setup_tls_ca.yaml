@@ -35,9 +35,7 @@
     ownca_privatekey_path: "{{ pki_path }}/ca/root-ca/private/root-ca.key"
     csr_path: "{{ pki_path }}/ca/tls-ca.csr"
     provider: ownca
-    key_usage:
-      - keyCertSign
-      - cRLSign
+    key_usage: "{{ key_usage }}"
     basic_constraints:
       - "CA:TRUE"
 
