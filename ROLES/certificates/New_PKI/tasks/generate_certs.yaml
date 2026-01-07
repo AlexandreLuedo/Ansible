@@ -1,4 +1,12 @@
 ---
 - name: generate certificate using the tls-ca
+  community.crypto.openssl_privatekey:
+    path: "{{ pki_path }}/ca/{{ item }}.key"
+    size: "{{ key_size }}"
+    type: "{{ key_type }}"
+    cipher: auto
+    passphrase: "I don't know if i change you"  # TODO Create an issue
+    mode: "{{ key_mode }}"
+  loop: "{{ domains }}"
 # Grab the openssl community package and put them here
 ...
