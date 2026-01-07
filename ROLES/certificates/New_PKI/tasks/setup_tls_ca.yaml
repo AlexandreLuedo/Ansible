@@ -2,11 +2,20 @@
 # Twos things for the CSR :
 # - Go to gen a new private key and public for the tls
 # - Use root-ca key
-- name: Generating CSR
+- name: Generate private key for tls-ca
+  community.crypto.openssl_privatekey:
+    path: "{{ pki_path }}/ca/private/tls-ca.key"
+    size: "{{ key_size }}"
+    type: "{{ key_type }}"
+    cipher: auto
+    passphrase: "I dont know"
+    mode: "{{ key_mode }}"
+
+- name: Generate CSR for tls-ca
   community.crypto.openssl_csr:
     path: "{{ pki_path }}/ca/tls-ca.csr"
     privatekey_path: "{{ pki_path }}/ca/tls-ca/private/tls-ca.key"
-    privatekey_passphrase: "I dont know if i change you"  # TODO Create also an issue 
+    privatekey_passphrase: "I dont know"
 
     common_name: "{{ organization_name }}"
     country_name: "{{ country_name }}"
