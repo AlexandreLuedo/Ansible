@@ -33,4 +33,20 @@
       - cRLSign
     basic_constraints:
       - "CA:TRUE"
+
+- name: Generate tsl-ca CRL
+  community.crypto.x509_crl:
+    path: "{{ pki_path }}/ca/crl/tls-ca.crl"
+    privatekey_path: "{{ pki_path }}/ca/tls-ca/private/tls-ca.key"
+
+    privatekey_passphrase: "I dont know if i change you"  # TODO Create also an issue 
+
+    digest: sha256
+
+    issuer:
+      CN: "{{ organization_name }}"
+      O: "{{ organization_name }}"
+      OU: "{{ organization_unit_name }}"
+      C: "{{ country_name }}"
+
 ...
