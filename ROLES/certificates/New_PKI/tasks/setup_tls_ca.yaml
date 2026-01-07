@@ -24,9 +24,7 @@
 
     basic_constraints: "CA:TRUE"
     basic_constraints_critical: true
-    key_usage:
-      - keyCertSign
-      - cRLSign
+    key_usage: "{{ key_usage }}"
     key_usage_critical: true
     create_subject_key_identifier: true
 
