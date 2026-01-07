@@ -2,8 +2,8 @@
 - name: Generating private key
   community.crypto.openssl_privatekey:
     path: "{{ pki_path }}/ca/root-ca/private/root-ca.key"
-    size: 4096  # More longer because it's during 10 years
-    type: RSA
+    size: "{{ key_size }}"  # More longer because it's during 10 years
+    type: "{{ key_type }}"
     cipher: auto
     passphrase: "I don't know if i change you"  # TODO Create an issue
     mode: '0600'
@@ -48,11 +48,8 @@
   community.crypto.x509_crl:
     path: "{{ pki_path }}/ca/crl/root-ca.crl"
     privatekey_path: "{{ pki_path }}/ca/root-ca/private/root-ca.key"
-
     privatekey_passphrase: "I dont know if i change you"  # TODO Create also an issue 
-
     digest: sha256
-
     issuer:
       CN: "{{ organization_name }}"
       O: "{{ organization_name }}"
