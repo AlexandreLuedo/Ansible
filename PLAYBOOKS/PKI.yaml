@@ -6,7 +6,7 @@
     ca:
       - root
       - tls
-    domains:                    # Prendre source inventaire 
+    domains:
       - idrac
       - main
   become: true
