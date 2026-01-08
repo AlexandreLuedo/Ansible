@@ -1,6 +1,8 @@
 ---
-- name: Create PKI architecture certificates
-  hosts:
-  var:
+- name: Create a full PKI, root-ca, tls-ca, tls-certs
+  hosts: serv3
+  become: true
   tasks:
-    - name: Verify if OpenSSL 3 or higher is installed, if not installe it
+    - name: Setup the root-ca
+      
+...
