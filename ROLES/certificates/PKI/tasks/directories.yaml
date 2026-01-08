@@ -1,0 +1,11 @@
+---
+- name: Creating basics folders
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: directory
+    mode: "{{ item.mode | default('0755') }}"
+    recursive: yes
+    loop:
+      - { path: "{{ project_folder }}/{{ root_ca_folder }}/{{ root_ca_private_folder }}", mode: '700' }
+      - { path:  "{{ project_folder }}/{{ root_ca_folder }}/{{ storage_path }}" } 
+...

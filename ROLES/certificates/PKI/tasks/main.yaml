@@ -1,0 +1,7 @@
+---
+import_tasks: setup.yaml
+import_tasks: ca_request.yaml
+import_tasks: directories.yaml
+import_tasks: include_template.yaml
+import_tasks: signing_ca.yaml
+...

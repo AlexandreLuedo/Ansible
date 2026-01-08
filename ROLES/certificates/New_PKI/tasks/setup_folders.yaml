@@ -1,0 +1,41 @@
+---
+- name: Create root-ca and more folder architecture
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: directory
+    owern: root
+    group: root
+    mode: "{{ item.mode | default('0755') }}"
+  loop: "{{ pki_dirs }}"
+
+  #  1.2 Create database <- Advanced PKI tutor
+- name: Creating blank index database file
+  ansible.builtin.copy:
+    content: ""
+    dest: "{{ pki_path }}/ca/{{ item }}/db/{{ item }}.db"
+    force: false
+    mode: '0644'
+  loop:
+    - root-ca
+    - tls-ca
+
+- name: Initialising serial number for certs
+  ansible.builtin.copy:
+    content: "01"
+    dest: "{{ pki_path }}/ca/{{ item }}/db/{{ item }}.crt.srl"
+    force: false
+    mode: '0644'
+  loop:
+    - root-ca
+    - tls-ca
+
+- name: Initialising serial of CRL
+  ansible.builtin.copy:
+    content: "01"
+    dest: "{{ pki_path }}/ca/{{ item }}/db/{{ item }}.crl.srl"
+    force: false
+    mode: '0644'
+  loop:
+    - root-ca
+    - tls-ca
+...

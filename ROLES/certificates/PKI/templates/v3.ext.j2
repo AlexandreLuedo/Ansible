@@ -1,0 +1,18 @@
+# ----------------------------------------------
+# File generate by Ansible – {{ ansible_date_time.iso8601 }}
+# ----------------------------------------------
+{# Proposed by Gemini #}
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage=digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+subjectAltName=@alt_names
+
+[alt_names]
+{#  Usage of the DNS mDNS (most liable) #}
+{% for dns in dns_list %}
+  DNS.{{ loop.index }} = {{ dns }}
+{% endfor %}
+{#  Usage of ip adress #}
+{% for ip in ip_list %}
+  DNS.{{ loop.index }} = {{ ip }}
+{% endfor %}

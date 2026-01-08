@@ -1,0 +1,27 @@
+---
+- name: Setup wireguard for Debian distributions using proton vpn.
+  hosts: localhost
+  vars:
+    config_path: ~/INFOR/WG
+    wireguard_config_name: wireguard
+  become: true
+  tasks:
+    - name: Downlaodig wireguard & resolve config
+      ansible.builtin.package:
+        name:
+          - wireguard
+          - resolvconf
+        present: yes
+    - name: Mooving configuration to the origin path to etc
+      ansible.builtin.command: "mv {{ config_path }}/{{ wireguard_config_name }}.conf /etc/wireguard"
+
+    - name: enabling config
+      ansible.builtin.systemd:
+        name: wg-quick@{{ wireguard_config_name }}.service
+        enabled: yes
+
+    - name: starting config
+      ansible.builtin.systemd:
+        name: wg-quick@{{ wireguard_config_name }}.service
+        state: started
+...

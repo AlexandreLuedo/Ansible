@@ -1,0 +1,34 @@
+---
+- name: Create a full PKI, root-ca, tls-ca, tls-certs
+  hosts: serv3
+  vars:
+    role: new_pki
+    ca:
+      - root
+      - tls
+    domains:
+      - idrac
+      - main
+  become: true
+  tasks:
+    - name: Setup folders
+      include_role:
+        name: "{{ role }}"
+        tasks_from: setup_folders
+
+    - name: Setup nginx container
+      include_role:
+        name: "{{ role }}"
+        tasks_from: setup_nginx_docker
+
+    - name: "Setup the {{ ca }}-ca"
+      include_role:
+        name: "{{ role}}"
+        tasks_from: "setup_{{ ca }}_ca"
+      loop: "{{ tls }}"
+
+    - name: Deploy the certs
+      include_role:
+        name: "{{ role }}"
+        tasks_from: "generate_certs"
+...

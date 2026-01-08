@@ -1,0 +1,56 @@
+---
+# Twos things for the CSR :
+# - Go to gen a new private key and public for the tls
+# - Use root-ca key
+- name: Generate private key for tls-ca
+  community.crypto.openssl_privatekey:
+    path: "{{ pki_path }}/ca/private/tls-ca.key"
+    size: "{{ key_size }}"
+    type: "{{ key_type }}"
+    cipher: auto
+    passphrase: "I dont know"
+    mode: "{{ key_mode }}"
+
+- name: Generate CSR for tls-ca
+  community.crypto.openssl_csr:
+    path: "{{ pki_path }}/ca/tls-ca.csr"
+    privatekey_path: "{{ pki_path }}/ca/tls-ca/private/tls-ca.key"
+    privatekey_passphrase: "I dont know"
+
+    common_name: "{{ organization_name }}"
+    country_name: "{{ country_name }}"
+    organization_name: "{{ organization_name }}"
+    organization_unit_name: "{{ organization_unit_name }}"
+
+    basic_constraints: "CA:TRUE"
+    basic_constraints_critical: true
+    key_usage: "{{ key_usage }}"
+    key_usage_critical: true
+    create_subject_key_identifier: true
+
+- name: Generating the tls-ca.crt
+  community.crypto.x509_certificate:
+    path: "{{ pki_path }}/ca/tls-ca/tls-ca.crt"
+    ownca_path: "{{ pki_path }}/ca/root-ca/root-ca.crt"
+    ownca_privatekey_path: "{{ pki_path }}/ca/root-ca/private/root-ca.key"
+    csr_path: "{{ pki_path }}/ca/tls-ca.csr"
+    provider: ownca
+    key_usage: "{{ key_usage }}"
+    basic_constraints:
+      - "CA:TRUE"
+
+- name: Generate tls-ca CRL
+  community.crypto.x509_crl:
+    path: "{{ pki_path }}/ca/crl/tls-ca.crl"
+    privatekey_path: "{{ pki_path }}/ca/tls-ca/private/tls-ca.key"
+
+    privatekey_passphrase: "I dont know"
+
+    digest: sha256
+
+    issuer:
+      CN: "{{ organization_name }}"
+      O: "{{ organization_name }}"
+      OU: "{{ organization_unit_name }}"
+      C: "{{ country_name }}"
+...

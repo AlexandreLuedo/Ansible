@@ -1,0 +1,22 @@
+#+title: Organisation
+#+LANGUAGE: fr
+Je ne sais même plus ce que j'ai écrit et comment ça fonctionne. Je pense réfléchir avant, et de tout refaire moi même.
+Le playbook doit être indépotant, fonctionner en donnant le nom de l'organisation, et tout faire de manière automatique et scalable :
+#+begin_src yaml
+organisation_name:              # Ce sont des groupes dans l'inventaire
+  - idrac
+  - main
+#+end_src
+1. Comprendre config d'une Root CA
+2. Générer la config root CA avec =organisation_name=
+3. Générer la config signing CA avec =organisation_name=
+4. Générer la config tls CA avec =organisation_name=
+5. Générer des certificats en utilisant les hosts des groups stockés dans =organisation_name=
+
+
+Il va y avoir toute une partie "deploy" dans les tasks pour déployer les configurations. Puis il y aura une seconde partie "setup", qui effectuera des actions à l'aide d'un fichier de configuration (qui aura été déployé).
+6. Tasks pour faire l'organisation des folders
+7. Tasks pour générer un root-ca en utilisant la template et en bouclant avec =organisation_name=
+8. Tasks pour générer un signing-ca (pareil qu'au dessus)
+9. Tasks pour générer un tls-ca (pareil qu'au dessus)
+10. Tasks pour générer les certificats en utilisant l'architecture du dessus.

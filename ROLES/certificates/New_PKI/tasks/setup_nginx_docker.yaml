@@ -1,0 +1,20 @@
+---
+- name: "Setup of PKI distribution server"
+  ansible.builtin.file:
+    path: "{{ pki_web_root }}"
+    state: directory
+    mode: '0755'
+    owener: root
+    group: root
+
+- name: Start Nginx Alpine container
+  community.docker.docker_container:
+    name: pki-nginx
+    image: nginx:alpine
+    state: started
+    restart_policy: unless-stopped
+    ports:
+      - "80:80" # extern port : intern port
+    volumes:
+      - "{{ pki_web_root }}:/usr/share/nginx/html:ro" # :ro is to say "Read Only"
+...
