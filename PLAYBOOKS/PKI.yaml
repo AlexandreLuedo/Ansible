@@ -16,6 +16,11 @@
         name: "{{ role }}"
         tasks_from: setup_folders
 
+    - name: Setup nginx container
+      include_role:
+        name: "{{ role }}"
+        tasks_from: setup_nginx_docker
+
     - name: "Setup the {{ ca }}-ca"
       include_role:
         name: "{{ role}}"
