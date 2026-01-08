@@ -7,9 +7,7 @@ country_name: FR
 
 # Domains
 current_domain: "{{ domains }}.cloud"
-domains:                        # Same variable as pdns role
-  - domain1
-  - domain2
+domains: none                        # Same variable as pdns role
 pki_web_root: "/var/www/pki"
 
 # Key infos
