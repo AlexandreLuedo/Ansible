@@ -5,7 +5,7 @@
     size: "{{ key_size }}"
     type: "{{ key_type }}"
     cipher: auto
-    passphrase: "I dont know if i change you"
+    passphrase: "passphrase"
     mode: "{{ key_mode }}"
   loop: "{{ domains }}"
 
@@ -14,33 +14,34 @@
   community.crypto.openssl_csr:
     path: "{{ pki_path }}/ca/{{ item }}.csr"
     privatekey_path: "{{ pki_path }}/ca/{{ item }}.key"
-    privatekey_passphrase: "I dont know if i change you"  # TODO Create also an issue 
+    privatekey_passphrase: "passphrase"
 
     common_name: "{{ item }}"
     country_name: "{{ country_name }}"
     organization_name: "{{ organization_name }}"
-    organization_unit_name: "{{ organization_unit_name }}"
+#    organization_unit_name: "{{ organization_unit_name }}"
 
-    basic_constraints: "CA:TRUE"
-    basic_constraints_critical: true
-    key_usage:
-      - keyCertSign
-      - cRLSign
-    key_usage_critical: true
+#    basic_constraints: "CA:TRUE"
+#    basic_constraints_critical: true
+#    key_usage:
+#      - keyCertSign
+#      - cRLSign
+#    key_usage_critical: true
     create_subject_key_identifier: true
   loop: "{{ domains }}"
 
 - name: Generating the certificate for {{ domains }}
   community.crypto.x509_certificate:
-    path: "{{ pki_path }}/ca/{{ item }}.crt"
+    path: "{{ pki_path }}/certs/{{ item }}.crt"
     ownca_path: "{{ pki_path }}/ca/tls-ca/tls-ca.crt"
     ownca_privatekey_path: "{{ pki_path }}/ca/tls-ca/private/tls-ca.key"
+    ownca_privatekey_passphrase: "passphrase"
     csr_path: "{{ pki_path }}/ca/{{ item }}.csr"
     provider: ownca
-    key_usage: "{{ key_usage }}"
-    basic_constraints:
-      - "CA:FALSE"
-    extended_key_usage:
-      - serverAuth
+#    key_usage: "{{ key_usage }}"
+#    basic_constraints:
+#      - "CA:FALSE"
+#    extended_key_usage:
+#      - serverAuth
   loop: "{{ domains }}"
 ...

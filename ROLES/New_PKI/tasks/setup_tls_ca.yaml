@@ -4,29 +4,32 @@
 # - Use root-ca key
 - name: Generate private key for tls-ca
   community.crypto.openssl_privatekey:
-    path: "{{ pki_path }}/ca/private/tls-ca.key"
+    path: "{{ pki_path }}/ca/tls-ca/private/tls-ca.key"
     size: "{{ key_size }}"
     type: "{{ key_type }}"
     cipher: auto
-    passphrase: "I dont know"
+    passphrase: "passphrase"
     mode: "{{ key_mode }}"
 
 - name: Generate CSR for tls-ca
   community.crypto.openssl_csr:
     path: "{{ pki_path }}/ca/tls-ca.csr"
     privatekey_path: "{{ pki_path }}/ca/tls-ca/private/tls-ca.key"
-    privatekey_passphrase: "I dont know"
+    privatekey_passphrase: "passphrase"
 
     common_name: "{{ organization_name }}"
     country_name: "{{ country_name }}"
     organization_name: "{{ organization_name }}"
-    organization_unit_name: "{{ organization_unit_name }}"
+#    organization_unit_name: "{{ organization_unit_name }}"
 
     basic_constraints: "CA:TRUE"
     basic_constraints_critical: true
     key_usage: "{{ key_usage }}"
     key_usage_critical: true
     create_subject_key_identifier: true
+    subject_alt_name: "{{ item.value | map('regex_replace', '^', 'DNS:') | list }}"
+  with_dict:
+    dns_server: "{{ domains }}"
 
 - name: Generating the tls-ca.crt
   community.crypto.x509_certificate:
@@ -35,22 +38,23 @@
     ownca_privatekey_path: "{{ pki_path }}/ca/root-ca/private/root-ca.key"
     csr_path: "{{ pki_path }}/ca/tls-ca.csr"
     provider: ownca
-    key_usage: "{{ key_usage }}"
-    basic_constraints:
-      - "CA:TRUE"
+    ownca_privatekey_passphrase: "passphrase"
+#    key_usage: "{{ key_usage }}"
+#    basic_constraints:
+#      - "CA:TRUE"
 
 - name: Generate tls-ca CRL
   community.crypto.x509_crl:
-    path: "{{ pki_path }}/ca/crl/tls-ca.crl"
+    path: "{{ pki_path }}/ca/tls-ca/crl/tls-ca.crl"
     privatekey_path: "{{ pki_path }}/ca/tls-ca/private/tls-ca.key"
-
-    privatekey_passphrase: "I dont know"
-
+    next_update: "+30d"
+    revoked_certificates: []
+    privatekey_passphrase: "passphrase"
+    unsafe_writes: true
     digest: sha256
-
     issuer:
       CN: "{{ organization_name }}"
       O: "{{ organization_name }}"
-      OU: "{{ organization_unit_name }}"
+#      OU: "{{ organization_unit_name }}"
       C: "{{ country_name }}"
 ...

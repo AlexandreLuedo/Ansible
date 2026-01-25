@@ -4,8 +4,14 @@
     path: "{{ pki_web_root }}"
     state: directory
     mode: '0755'
-    owener: root
+    owner: root
     group: root
+
+- name: Ensure Docker service is installed and running
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: true
 
 - name: Start Nginx Alpine container
   community.docker.docker_container:

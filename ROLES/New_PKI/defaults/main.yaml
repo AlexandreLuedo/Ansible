@@ -1,13 +1,13 @@
 ---
 # Organization infos
-email_address: admin.{{ current_domain }}
-organization_name: none
+email_address: "admin.{{ current_domain }}"
+organization_name: "My cloud"
 organization_unit_name: none
 country_name: FR
 
 # Domains
 current_domain: "{{ domains }}.cloud"
-domains: none                        # Same variable as pdns role
+domains: test                       # Must be changed in playbook
 pki_web_root: "/var/www/pki"
 
 # Key infos
@@ -28,10 +28,15 @@ pki_dirs:
   - path: "{{ pki_path}}/ca/root-ca"
   - path: "{{ pki_path}}/ca/tls-ca"
 
+# root-ca
   - path: "{{ pki_path }}/ca/root-ca/private"
     mode: '0700'
   - path: "{{ pki_path }}/ca/root-ca/db"
-  - path: "{{ pki_path }}/ca/tls-ca/db"
+  - path: "{{ pki_path }}/ca/root-ca/crl"
+
+# tls-ca
   - path: "{{ pki_path }}/ca/tls-ca/private"
     mode: '0700'
+  - path: "{{ pki_path }}/ca/tls-ca/db"
+  - path: "{{ pki_path }}/ca/tls-ca/crl"
 ...
