@@ -1,15 +1,19 @@
 ---
 - name: Create a full PKI, root-ca, tls-ca, tls-certs
   hosts: serv3
+  become: true
   vars:
-    role: new_pki
+    role: New_PKI
     ca:
       - root
       - tls
     domains:
-      - idrac
-      - main
-  become: true
+      - main.cloud
+      - serv1.idrac.cloud
+      - serv2.idrac.cloud
+      - serv3.idrac.cloud
+      - umbrel.local
+
   tasks:
     - name: Setup folders
       include_role:
