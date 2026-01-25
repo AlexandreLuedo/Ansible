@@ -23,7 +23,16 @@ security:
   hosts:
     serv4:
       ansible_host: 192.168.1.XX
-
+pc:
+  hosts:
+    pcomarchy:
+      ansible_host: 192.168.1.87
+      ansible_user: alexandre
+    omarchy:
+      ansible_host: 192.168.1.XX
+    macos:
+      ansible_host: 192.168.1.127
+      ansible_user: hadrienklotz
 printer:
   hosts:
     HPD1BD80:
