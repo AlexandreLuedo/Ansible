@@ -1,8 +1,9 @@
 ---
 - name: Installation & configuration of chrony
-  host: serv3
+  hosts: serv3
   become: true
   vars:
     chrony_path: /etc/chrony.conf
     pool_ntp_server: debian.pool.ntp.org # use by role
-  import_role: chrony
+  roles:
+    - chrony
