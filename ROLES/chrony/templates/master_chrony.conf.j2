@@ -1,13 +1,10 @@
 #----------------------------------------------
-# File generatore by Ansible – {{ ansible_date_time.iso8601 }}
+# File generatore by Ansible – {{ ansible_facts["date_time"]["iso8601"] }}
 # ---------------------------------------------
 {# It is the master ntp server #}
 {# Proposed by Gemini #}
-{% for server in addresses %}
-  server {{ addresses }} iburst
-{% endfor %}
-
-  pool {{ pool_ntp_server }}
+server {{ ansible_facts["default_ipv4"]["address"] }} iburst
+ pool {{ pool_ntp_server }}
 
 {# Yanked from a personnal ressource #}
 driftfile /var/lib/chrony/drift
