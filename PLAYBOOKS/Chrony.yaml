@@ -3,47 +3,14 @@
   host: serv3
   become: true
   vars:
-    pool: pool debian.pool.ntp.org
     chrony_path: /etc/chrony.conf
-    conf_name: chrony.conf
+    pool_ntp_server: debian.pool.ntp.org # use by role
   tasks:
     - name: Install Chronyd
-      include_role:
-        name: install_package
-      vars:
-        apt_name: chrony
-
-    - name: verify that chrony config exist and haren't empty
-      stat:
-        path: "{{ chrony_path }}"
-      register: var_config
-    - debug:
-        msg: "The config file exist as {{ chrony_path }}"
-      when: var_config.stat.exists
-    - debug:
-        msg: "The file {{ chrony_path }} does not exists"
-      when: not var_config.stat.exists
-
-    - name: Search {{ conf_name }} from the root
-      ansible.builtin.find:
-        paths: "/"
-        patterns: "{{ conf_name }}"
-        recurse: yes
-        file_type: file
-      when: not var_config.stat.exists
-
-    - name: Add the pool for the {{ conf_name }} if the chrony file is finded.
-      ansible.builtin.lineinfile:
-        path: "{{ item.path }}"
-      line: "{{ pool }}"
-      when: not var_config.stat.exists
-
+      ansible.builtin.apt:
+        name: chrony
+        state: present
     - name: Create a vip for chrony
       import_role:
         name: vip
         import_tasks:
-          
-    - name: Add the pool for the /etc/chrony.conf
-      ansible.builtin/ineinfile:
-        path: "{{ chrony_path }}"
-      line: "{{ pool }}"
