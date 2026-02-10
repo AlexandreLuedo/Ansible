@@ -1,0 +1,28 @@
+#----------------------------------------------
+# File generatore by Ansible – {{ ansible_date_time.iso8601 }}
+# ---------------------------------------------
+{# It is the slave ntp server #}
+{# Proposed by Gemini #}
+{% for server in vip_adress %}
+  server {{ vip_adress }} iburst
+{% endfor %}
+
+{# My own code #}
+{% if pool_ntp_server is defined %}
+  pool {{ master_server }}
+{% endif %}
+
+{# Yanked from a personnal ressource #}
+driftfile /var/lib/chrony/drift
+makestep 1.0 3
+rtcsync
+keyfile /etc/chrony.keys
+ntsdumpdir /var/lib chrony
+leapsectz right/UTC
+logdir /var/log/chrony
+
+{# {% if chrony_allow_subnet is defined and chrony_allow_subnet|lenght > 0 %} #}
+{#   {% for subnet in chrony_allow_subnet %} #}
+{#     allow{{ subnet }} #}
+{#   {% endfor %} #}
+{# {% endif %} #}
