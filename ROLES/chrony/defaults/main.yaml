@@ -1,6 +1,6 @@
 ---
 pool_ntp_server: none           # Required
-vip_ip_adress: none             # Required
+addresses: none             # Required
 chrony_config_path: /etc/chrony.conf
 master_server: "{{ vip_ip_adress }}" # This var is only used for ntp client to connect trough the server
 submask: 192.168.1.0/24
