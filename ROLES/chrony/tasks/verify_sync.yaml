@@ -1,7 +1,4 @@
 ---
 - Name: Verify the synchronisation
   ansible.builtin.command: chronyc tracking
-  register: chrony_status
-  changed_when: false
-  failed_when: false
 ...
