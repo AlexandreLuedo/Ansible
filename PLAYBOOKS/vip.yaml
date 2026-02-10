@@ -10,11 +10,6 @@
     - systemd
 
   tasks:
-    - name: Start & enable systemctl service for the module
-      ansible.builtin.systemd_service:
-        name: systemd-networkd
-        state: start
-        enabled: true
        
     - name: Create the config file, add the vip then restart the module
       import_role:
