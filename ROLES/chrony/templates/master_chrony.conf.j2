@@ -3,14 +3,11 @@
 # ---------------------------------------------
 {# It is the master ntp server #}
 {# Proposed by Gemini #}
-{% for server in vip_adress %}
-  server {{ vip_adress }} iburst
+{% for server in addresses %}
+  server {{ addresses }} iburst
 {% endfor %}
 
-{# My own code #}
-{% if pool_ntp_server is defined %}
   pool {{ pool_ntp_server }}
-{% endif %}
 
 {# Yanked from a personnal ressource #}
 driftfile /var/lib/chrony/drift
