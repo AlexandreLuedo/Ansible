@@ -5,12 +5,4 @@
   vars:
     chrony_path: /etc/chrony.conf
     pool_ntp_server: debian.pool.ntp.org # use by role
-  tasks:
-    - name: Install Chronyd
-      ansible.builtin.apt:
-        name: chrony
-        state: present
-    - name: Create a vip for chrony
-      import_role:
-        name: vip
-        import_tasks:
+  import_role: chrony
