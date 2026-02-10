@@ -1,8 +1,7 @@
 ---
-- Name: Enable and start systemd-networkd
-  import_role:
-    name: systemd
-    tasks_from: start_enable.yaml
-  vars:
-    service_name: "{{ networkd }}"
+- name: Start & enable systemctl service for the module
+  ansible.builtin.systemd_service:
+    name: systemd-networkd
+    state: start
+    enabled: true
 ...
