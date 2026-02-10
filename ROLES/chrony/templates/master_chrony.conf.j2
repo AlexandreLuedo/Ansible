@@ -1,7 +1,7 @@
 #----------------------------------------------
 # File generatore by Ansible – {{ ansible_date_time.iso8601 }}
 # ---------------------------------------------
-
+{# It is the master ntp server #}
 {# Proposed by Gemini #}
 {% for server in vip_adress %}
   server {{ vip_adress }} iburst
@@ -20,6 +20,7 @@ keyfile /etc/chrony.keys
 ntsdumpdir /var/lib chrony
 leapsectz right/UTC
 logdir /var/log/chrony
+allow {{ submask }}
 
 {# {% if chrony_allow_subnet is defined and chrony_allow_subnet|lenght > 0 %} #}
 {#   {% for subnet in chrony_allow_subnet %} #}
