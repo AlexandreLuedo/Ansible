@@ -1,7 +1,0 @@
----
-- name: Add a vip to the ntp config file to act like a ntp server
-  include_role:
-    name: vip
-    
-
-...

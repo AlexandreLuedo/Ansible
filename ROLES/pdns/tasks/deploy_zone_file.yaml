@@ -1,0 +1,12 @@
+---
+- name: "Deploy {{ domains }} zone file"
+  ansible.builtin.template:
+    src: file.zone.j2
+    dest: "{{ pdns_path }}/{{ current_domain }}.zone"
+    owner: "{{ user_id }}"
+    group: "{{ group_id }}"
+    mode: "{{ access }}"
+  loop: "{{ domains }}"
+  loop_control:
+    loop_var: current_domain
+...

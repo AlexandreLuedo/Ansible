@@ -1,0 +1,39 @@
+---
+- name: Download, configure and deploy nfs using the nfs kernel (server side)
+  hosts: serv3
+  roles:
+    - { role: ansible-role-nfs }
+
+  become: true
+  vars:
+    vip_ip_adress: 192.168.1.41/24 # I prefer when I set tasks here
+    allowed_devices:
+      - "{{ omarchy_pc }}"
+      - "{{ omarchy_tablet }}"
+      - "{{ pave_pro }}"
+
+  tasks:
+    - name: create {{ shared_folder }} folder with perms
+      ansible.builtin.file:
+        path: "{{ base_path }}"
+        owner: root
+        group: root
+        mode: 775
+        state: directory
+    # - name: Use ansible-nfs role
+    #   include_role:
+    #     name: ansible-nfs
+    # For the future
+    # name: create {{ vip_ip_adress }} as a vip
+    #   import_role:
+    #     name: vip
+    #     vars:
+    #       ip_adress: "{{ vip_ip_adress }}"
+    #     tasks_from: add_vip
+    #
+    # - name: Allow client
+    #   ansible.builtin.lineinfile:
+    #     path: /etc/exports
+    #     line: "{% for devices in allowed_devices %}/serv/nfs/{{ shared_folder }} {{ allowed_devices }}(rw,sync,no_subtree_check) {% endfor %}"
+    # - name: Applied
+...

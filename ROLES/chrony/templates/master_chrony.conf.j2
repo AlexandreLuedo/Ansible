@@ -1,16 +1,10 @@
 #----------------------------------------------
-# File generatore by Ansible – {{ ansible_date_time.iso8601 }}
+# File generatore by Ansible – {{ ansible_facts["date_time"]["iso8601"] }}
 # ---------------------------------------------
-
+{# It is the master ntp server #}
 {# Proposed by Gemini #}
-{% for server in vip_adress %}
-  server {{ vip_adress }} iburst
-{% endfor %}
-
-{# My own code #}
-{% if pool_ntp_server is defined %}
-  pool {{ pool_ntp_server }}
-{% endif %}
+server {{ ansible_facts["default_ipv4"]["address"] }} iburst
+ pool {{ pool_ntp_server }}
 
 {# Yanked from a personnal ressource #}
 driftfile /var/lib/chrony/drift
@@ -20,6 +14,7 @@ keyfile /etc/chrony.keys
 ntsdumpdir /var/lib chrony
 leapsectz right/UTC
 logdir /var/log/chrony
+allow {{ submask }}
 
 {# {% if chrony_allow_subnet is defined and chrony_allow_subnet|lenght > 0 %} #}
 {#   {% for subnet in chrony_allow_subnet %} #}
