@@ -6,21 +6,55 @@ idrac:
     idrac_serv2:
       ansible_host: 192.168.1.28
     idrac_serv3:
-      ansible_host: 192.168.1.32
+      ansible_host: 192.168.1.33
 homelab:
   hosts:
     serv1:
       ansible_host: 192.168.1.12
       ansible_user: umbrel
-production_server:
+server:
   hosts:
     serv2:
-      ansible_host: none # Il faudra t(rouver l'IP du serv
+      ansible_host: 192.168.1.XX
     serv3:
-      ansible_host: 192.168.1.33
+      ansible_host: 192.168.1.83
       ansible_user: hadrien
 security:
   hosts:
     serv4:
-      ansible_host: none
+      ansible_host: 192.168.1.XX
+pc:
+  hosts:
+    pcomarchy:
+      ansible_host: 192.168.1.87
+      ansible_user: alexandre
+    omarchy:
+      ansible_host: 192.168.1.XX
+    macos:
+      ansible_host: 192.168.1.127
+      ansible_user: hadrienklotz
+printer:
+  hosts:
+    HPD1BD80:
+      ansible_host: 192.168.1.25
+main:
+  hosts:
+    nextcloud:
+      ansible_host: 10.1.0.1
+    immich:
+      ansible_host: 10.1.0.2
+    forgejo:
+      ansible_host: 10.1.0.3
+side:
+  hosts:
+    ganache.lab:
+      ansible_host: 10.1.1.1
+test:
+  hosts:
+    kubernetes:
+      ansible_host: 10.1.2.1
+umbrel:
+  hosts:
+    umbrel_nextcloud:
+      ansible_host: "{{ serv1 }}:8081"
 ...
