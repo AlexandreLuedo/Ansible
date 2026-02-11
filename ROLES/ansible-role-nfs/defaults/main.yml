@@ -1,0 +1,6 @@
+---
+nfs_exports: ["{{ base_path }}    *(rw,sync,no_root_squash)"]
+nfs_rpcbind_state: started
+nfs_rpcbind_enabled: true
+base_path: "/nfs/exports/{{ shared_folder }}"
+shared_folder: serv3_shared
