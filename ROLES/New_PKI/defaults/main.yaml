@@ -1,13 +1,12 @@
 ---
 # Organization infos
 email_address: "admin.{{ current_domain }}"
-organization_name: "My cloud"
-organization_unit_name: none
-country_name: FR
+organization_name: none
+# organization_unit_name: none    
+country_name: none
 
 # Domains
 current_domain: "{{ domains }}.cloud"
-domains: test                       # Must be changed in playbook
 pki_web_root: "/var/www/pki"
 
 # Key infos
