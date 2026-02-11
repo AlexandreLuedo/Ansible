@@ -56,5 +56,5 @@ test:
 umbrel:
   hosts:
     umbrel_nextcloud:
-      ansible_host: "{{ serv3 }}:8081"
+      ansible_host: "{{ serv1 }}:8081"
 ...
