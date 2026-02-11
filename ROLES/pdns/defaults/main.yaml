@@ -9,7 +9,7 @@ pdns_path: /etc/powerdns
 local_address: 0.0.0.0
 user_id: pdns
 group_id: pdns
-access: '0640'
+access: "0640"
 is_primary: yes
 is_secondary: none
 ...
