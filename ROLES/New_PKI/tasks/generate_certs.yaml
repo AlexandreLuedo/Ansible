@@ -2,12 +2,13 @@
 - name: Generate private key
   community.crypto.openssl_privatekey:
     path: "{{ pki_path }}/ca/{{ item }}.key"
-    size: "{{ key_size }}"
-    type: "{{ key_type }}"
+    size: "{{ key_size | default(2048) }}"
+    type: "{{ key_type | default('RSA') }}"
     cipher: auto
     passphrase: "passphrase"
     mode: "{{ key_mode }}"
   loop: "{{ domains }}"
+  run_once: true
 
 # Grab the openssl community package and put them here
 - name: Generate CSR
@@ -15,22 +16,15 @@
     path: "{{ pki_path }}/ca/{{ item }}.csr"
     privatekey_path: "{{ pki_path }}/ca/{{ item }}.key"
     privatekey_passphrase: "passphrase"
-
     common_name: "{{ item }}"
-    country_name: "{{ country_name }}"
-    organization_name: "{{ organization_name }}"
-#    organization_unit_name: "{{ organization_unit_name }}"
-
-#    basic_constraints: "CA:TRUE"
-#    basic_constraints_critical: true
-#    key_usage:
-#      - keyCertSign
-#      - cRLSign
-#    key_usage_critical: true
+    subject_lat_name: "DNS:{{ item }}"
+    country_name: "{{ country_name | default('FR') }} "
+    organization_name: "{{ organization_name | default('Default_Org') }}"
     create_subject_key_identifier: true
   loop: "{{ domains }}"
+  run_once: true
 
-- name: Generating the certificate for {{ domains }}
+- name: Sign certificate for {{ domains }} with TLS CA
   community.crypto.x509_certificate:
     path: "{{ pki_path }}/certs/{{ item }}.crt"
     ownca_path: "{{ pki_path }}/ca/tls-ca/tls-ca.crt"
