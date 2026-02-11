@@ -18,7 +18,7 @@
     privatekey_passphrase: "passphrase"
     common_name: "{{ item }}"
     subject_alt_name: "DNS:{{ item }}"
-    country_name: "{{ country_name | default('FR') }} "
+    country_name: '{{ country_name|default("FR") }}'
     organization_name: "{{ organization_name | default('Default_Org') }}"
     create_subject_key_identifier: true
   loop: "{{ domains }}"
