@@ -1,7 +1,0 @@
----
-- name: Sign root certificate   # 1.4 
-  community.crypto.openssl_certificates:
-    csr_path: "{{ csr_path }}" # in
-    privatekey_path: "{{ privatekey_path }}" # out
-    config:                                  # This is were I must put the config name
-...

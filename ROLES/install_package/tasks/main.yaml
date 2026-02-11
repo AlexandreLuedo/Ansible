@@ -1,8 +1,0 @@
----
-- Name: Install "{{ apt_name }}"
-  become: true
-  apt:
-    name: "{{ apt_name }}"
-    state: present
-    update_cache: yes
-...

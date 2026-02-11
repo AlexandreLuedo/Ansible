@@ -1,7 +1,0 @@
----
-- name: Create certificate authority request
-    config: "{{ config_name }}"
-    path: "{{ project_folder }}/{{ root_ca_folder }}.csr"
-    private_path: "{{ project_folder }}/{{ root_ca_folder }}.key"
-    state: present              # For beying indepotent
-...

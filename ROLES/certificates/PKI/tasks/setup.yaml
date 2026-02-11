@@ -1,8 +1,0 @@
----
-- name: Verify modules works
-  ansible.builtin.package:
-    name:
-      - openssl
-      - ca-certificates
-    state: present
-...
