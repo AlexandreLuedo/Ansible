@@ -1,0 +1,51 @@
+---
+- name: Generate private key
+  community.crypto.openssl_privatekey:
+    path: "{{ pki_path }}/ca/{{ item }}.key"
+    size: "{{ key_size | default(2048) }}"
+    type: "{{ key_type | default('RSA') }}"
+    cipher: auto
+    passphrase: "passphrase"
+    mode: "{{ key_mode }}"
+  loop: "{{ domains }}"
+  run_once: true
+
+# Grab the openssl community package and put them here
+- name: Generate CSR
+  community.crypto.openssl_csr:
+    path: "{{ pki_path }}/ca/{{ item }}.csr"
+    privatekey_path: "{{ pki_path }}/ca/{{ item }}.key"
+    privatekey_passphrase: "passphrase"
+    common_name: "{{ item }}"
+    subject_alt_name: "DNS:{{ item }}"
+    country_name: '{{ country_name|default("FR") }}'
+    organization_name: "{{ organization_name | default('Default_Org') }}"
+    create_subject_key_identifier: true
+  loop: "{{ domains }}"
+  run_once: true
+
+- name: Sign certificate for {{ domains }} with TLS CA
+  community.crypto.x509_certificate:
+    path: "{{ pki_path }}/certs/{{ item }}.crt"
+    ownca_path: "{{ pki_path }}/ca/tls-ca/tls-ca.crt"
+    ownca_privatekey_path: "{{ pki_path }}/ca/tls-ca/private/tls-ca.key"
+    ownca_privatekey_passphrase: "passphrase"
+    csr_path: "{{ pki_path }}/ca/{{ item }}.csr"
+    provider: ownca
+  loop: "{{ domains }}"
+  run_once: true
+
+- name: Generate PKCS#12 files
+  community.crypto.openssl_pkcs12:
+    action: export
+    path: "{{ pki_path }}/certs/{{ item }}.p12"
+    friendly_name: "{{ item }}"
+    privatekey_path: "{{ pki_path }}/ca/{{ item }}.key"
+    privatekey_passphrase: "passphrase"
+    certificate_path: "{{ pki_path }}/certs/{{ item }}.crt"
+    other_certificates: "{{ pki_path }}/ca/tls-ca/tls-ca.crt"
+    passphrase: "export_password"
+    state: present
+  loop: "{{ domains }}"
+  run_once: true
+...

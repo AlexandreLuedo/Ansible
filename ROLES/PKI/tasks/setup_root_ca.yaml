@@ -5,7 +5,7 @@
     size: "{{ key_size }}"  # More longer because it's during 10 years
     type: "{{ key_type }}"
     cipher: auto
-    passphrase: "I dont know if i change you"
+    passphrase: "passphrase"
     mode: "{{ key_mode }}"
 
 - name: Generating CSR
@@ -15,9 +15,9 @@
     privatekey_passphrase: "passphrase"
 
     common_name: "{{ organization_name }}"
-    country_name: "{{ contry_name }}"
+    country_name: "{{ country_name }}"
     organization_name: "{{ organization_name }}"
-    organization_unit_name: "{{ organization_unit_name }}"
+#    organization_unit_name: "{{ organization_unit_name }}"
 
     basic_constraints: "CA:TRUE"
     basic_constraints_critical: true
@@ -27,7 +27,7 @@
 
 - name: Generate self-signed certificate
   community.crypto.x509_certificate:
-    path: "{{ pki_path }}/ca/root-ca.crt"
+    path: "{{ pki_path }}/ca/root-ca/root-ca.crt"
     privatekey_path: "{{ pki_path }}/ca/root-ca/private/root-ca.key"
     privatekey_passphrase: "passphrase"
     csr_path: "{{ pki_path }}/ca/root-ca.csr"
@@ -36,20 +36,23 @@
 
     selfsigned_create_subject_key_identifier: create_if_not_provided
 
-    key_usage: "{{ key_usage }}"
+#    key_usage: "{{ key_usage }}"
 
-    basic_constraints:
-      - "CA:TRUE"
+#    basic_constraints:          
+#      - "CA:TRUE"
 
 - name: Generate initial CRL
   community.crypto.x509_crl:
-    path: "{{ pki_path }}/ca/crl/root-ca.crl"
+    path: "{{ pki_path }}/ca/root-ca/crl/root-ca.crl"
     privatekey_path: "{{ pki_path }}/ca/root-ca/private/root-ca.key"
     privatekey_passphrase: "passphrase"
+    next_update: "+30d"
+    revoked_certificates: []
+#    unsafe_writes: true
     digest: sha256
     issuer:
       CN: "{{ organization_name }}"
       O: "{{ organization_name }}"
-      OU: "{{ organization_unit_name }}"
+#      OU: "{{ organization_unit_name }}"
       C: "{{ country_name }}"
 ...
