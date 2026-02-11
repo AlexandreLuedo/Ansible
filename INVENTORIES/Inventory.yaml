@@ -39,12 +39,18 @@ printer:
       ansible_host: 192.168.1.25
 main:
   hosts:
-    nextcloud:
+    ntp:
       ansible_host: 10.1.0.1
-    immich:
+    dns:
       ansible_host: 10.1.0.2
-    forgejo:
+    nfs:
       ansible_host: 10.1.0.3
+    nextcloud:
+      ansible_host: 10.1.0.4
+    immich:
+      ansible_host: 10.1.0.5
+    forgejo:
+      ansible_host: 10.1.0.6
 side:
   hosts:
     ganache.lab:
