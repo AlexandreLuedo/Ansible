@@ -1,6 +1,9 @@
 ---
 - name: Download, configure and deploy nfs using the nfs kernel (server side)
   hosts: serv3
+  roles:
+    - { role: ansible-role-nfs }
+
   become: true
   vars:
     vip_ip_adress: 192.168.1.41/24 # I prefer when I set tasks here
@@ -17,9 +20,9 @@
         group: root
         mode: 775
         state: directory
-    - name: Use ansible-nfs role
-      include_role:
-        name: ansible-nfs
+    # - name: Use ansible-nfs role
+    #   include_role:
+    #     name: ansible-nfs
     # For the future
     # name: create {{ vip_ip_adress }} as a vip
     #   import_role:
@@ -27,7 +30,7 @@
     #     vars:
     #       ip_adress: "{{ vip_ip_adress }}"
     #     tasks_from: add_vip
-    #     
+    #
     # - name: Allow client
     #   ansible.builtin.lineinfile:
     #     path: /etc/exports
