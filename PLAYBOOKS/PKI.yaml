@@ -3,6 +3,10 @@
   hosts: serv3
   become: true
   vars:
+    # ROLES VARS => defaults/main.yaml
+    organization_name: "My cloud"
+    country_name: FR
+
     role: New_PKI
     ca:
       - root
