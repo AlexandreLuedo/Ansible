@@ -2,6 +2,17 @@
 # Role execution
 role: New_PKI
 
+ca:
+  - root
+  - tls
+
+domains:
+  - main.cloud
+  - serv1.idrac.cloud
+  - serv2.idrac.cloud
+  - serv3.idrac.cloud
+  - umbrel.local
+
 # Folders
 pki_path: /root/pki
 pki_dirs:

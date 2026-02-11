@@ -8,12 +8,4 @@
     # ROLES VARS => defaults/main.yaml
     organization_name: "My cloud"
     country_name: FR
-    ca:
-      - root
-      - tls
-    domains:
-      - main.cloud
-      - serv1.idrac.cloud
-      - serv2.idrac.cloud
-      - serv3.idrac.cloud
-      - umbrel.local
+...
