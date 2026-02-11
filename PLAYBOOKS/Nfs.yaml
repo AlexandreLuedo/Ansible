@@ -3,40 +3,34 @@
   hosts: serv3
   become: true
   vars:
-    module: nfs-kernel-server
     vip_ip_adress: 192.168.1.41/24 # I prefer when I set tasks here
-    shared_folder: serv3shared
     allowed_devices:
-      - {{ omarchy_pc }}
-      - {{ omarchy_tablet }}
-      - {{ pave_pro }}
+      - "{{ omarchy_pc }}"
+      - "{{ omarchy_tablet }}"
+      - "{{ pave_pro }}"
 
   tasks:
-    - name: Install {{ nfs-kernel-server }}
-      import_role: 
-        name: install_package
-        vars:
-          apt_name: "{{ nfs-kernel-server }}"
-
-    - name: create {{ shared_folder }} folder and approriate access and permission
+    - name: create {{ shared_folder }} folder with perms
       ansible.builtin.file:
-        path: "/nfs/exports/{{ shared_folder }}"
+        path: "{{ base_path }}"
         owner: root
         group: root
         mode: 775
-        state: create
-
-    - name: create {{ vip_ip_adress }} as a vip
-      import_role:
-        name: vip
-        vars:
-          ip_adress: "{{ vip_ip_adress }}"
-        tasks_from: add_vip
-
-    - name: Allow client 
-      ansible.builtin.lineinfile:
-        path: /etc/exports
-        line: "{% for devices in allowed_devices %}/serv/nfs/{{ shared_folder }} {{ allowed_devices }}(rw,sync,no_subtree_check) {% endfor %}"
-  
-    - name: Applied 
+        state: directory
+    - name: Use ansible-nfs role
+      include_role:
+        name: ansible-nfs
+    # For the future
+    # name: create {{ vip_ip_adress }} as a vip
+    #   import_role:
+    #     name: vip
+    #     vars:
+    #       ip_adress: "{{ vip_ip_adress }}"
+    #     tasks_from: add_vip
+    #     
+    # - name: Allow client
+    #   ansible.builtin.lineinfile:
+    #     path: /etc/exports
+    #     line: "{% for devices in allowed_devices %}/serv/nfs/{{ shared_folder }} {{ allowed_devices }}(rw,sync,no_subtree_check) {% endfor %}"
+    # - name: Applied
 ...
