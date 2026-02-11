@@ -17,7 +17,7 @@
     privatekey_path: "{{ pki_path }}/ca/{{ item }}.key"
     privatekey_passphrase: "passphrase"
     common_name: "{{ item }}"
-    subject_lat_name: "DNS:{{ item }}"
+    subject_alt_name: "DNS:{{ item }}"
     country_name: "{{ country_name | default('FR') }} "
     organization_name: "{{ organization_name | default('Default_Org') }}"
     create_subject_key_identifier: true
@@ -42,7 +42,7 @@
     friendly_name: "{{ item }}"
     privatekey_path: "{{ pki_path }}/ca/{{ item }}.key"
     privatekey_passphrase: "passphrase"
-    certifiacte_path: "{{ pki_path }}/certs/{{ item }}.crt"
+    certificate_path: "{{ pki_path }}/certs/{{ item }}.crt"
     other_certificates: "{{ pki_path }}/ca/tls-ca/tls-ca.crt"
     passphrase: "export_password"
     state: present
