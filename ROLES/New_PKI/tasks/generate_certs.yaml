@@ -32,10 +32,20 @@
     ownca_privatekey_passphrase: "passphrase"
     csr_path: "{{ pki_path }}/ca/{{ item }}.csr"
     provider: ownca
-#    key_usage: "{{ key_usage }}"
-#    basic_constraints:
-#      - "CA:FALSE"
-#    extended_key_usage:
-#      - serverAuth
   loop: "{{ domains }}"
+  run_once: true
+
+- name: Generate PKCS#12 files
+  community.crypto.openssl_pkcs12:
+    action: export
+    path: "{{ pki_path }}/certs/{{ item }}.p12"
+    friendly_name: "{{ item }}"
+    privatekey_path: "{{ pki_path }}/ca/{{ item }}.key"
+    privatekey_passphrase: "passphrase"
+    certifiacte_path: "{{ pki_path }}/certs/{{ item }}.crt"
+    other_certificates: "{{ pki_path }}/ca/tls-ca/tls-ca.crt"
+    passphrase: "export_password"
+    state: present
+  loop: "{{ domains }}"
+  run_once: true
 ...
