@@ -1,0 +1,23 @@
+---
+- name: Get the TLS-CA infos
+  slurp:
+    src: "{{ pki_path }}/ca/tls-ca/tls-ca.crt"
+  register: ca_cert_content
+  run_once: true
+
+- name: Get the certs infos
+  slurp:
+    src: "{{ pki_path }}/certs/{{ item }}.crt"
+    register: domain_certs_content
+  loop: "{{ domains }}"
+
+  # Proposed by Gemini
+- name: Merge the TLS-CA & certs
+  copy:
+    dest: "{{ pki_path }}/certs/{{ item.item}}.pem"
+    mode: "0644"
+    contents: |
+      {{ item.content | b64decode }}
+      {{ ca_cert_content['content'] | b64decode }}
+  loop: "{{ domain_certs_content.results }}"
+...
