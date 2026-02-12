@@ -1,12 +1,12 @@
 ---
 role: Keepalived
-
-power:
-  master:
+power_nodes:
+  - hostname: "serv3"
+    role: "master"
     state: MASTER
     priority: 100
-
-  backup:
+  - hostname: "serv2"
+    role: "master"
     state: BACKUP
     priority: 90
 ...
