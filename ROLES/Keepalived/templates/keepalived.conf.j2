@@ -1,0 +1,20 @@
+#----------------------------------------------
+# File generatore by Ansible – {{ ansible_facts["date_time"]["iso8601"] }}
+# ---------------------------------------------
+vrrp_instance VI_1 {
+        state {{ current_power.state }}
+        interface {{ interface }}
+        virtual_router_id {{ virtual_router_id }}
+        priority {{ current_power.priority }}
+        advert_int 1
+        authentication {
+              auth_type {{ auth_type }}
+              auth_pass {{ auth_pass }}
+        }
+
+        virtual_ipaddress {
+{% for host in groups[current_processus] %}
+              {{ hostvars[host]['ansible_host'] }}/24 
+{% endfor %}
+        }
+}

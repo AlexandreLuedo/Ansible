@@ -1,0 +1,12 @@
+---
+role: Keepalived
+
+power:
+  master:
+    state: MASTER
+    priority: 100
+
+  backup:
+    state: BACKUP
+    priority: 90
+...
