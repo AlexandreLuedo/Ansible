@@ -1,0 +1,76 @@
+#+title: Readme
+#+LANGUAGE: EN
+* PDNS role
+You can see here: pdns/meta/[[~/INFOR/INFRA/ANSIBLE/ROLES/pdns/meta/argument_specs.yaml][argument_specs.yaml]]
+#+begin_quote
+[!INFOS]
+This role is Idempotent only if you doesn't clear the var who store the value.
+#+end_quote
+** How it works
+#+begin_quote
+[!NOTE]
+This role use [[https://www.powerdns.com/][PowerDNS]] to run a DNS instance. Using the =Inventory.yaml= file for single source of true in order to write DNS records.
+#+end_quote
+1. Will use =domains= (this var reffers to a group) to look the storred =ansible_hostname= value for each host in the =Inventory.yaml= file.
+2. Deploy the pdns.conf.j2
+3. Deploy the bind.conf.j2 who for each =hosts= stored in their =group_hosts=
+4. Deploy for each =domains= an file.zone.
+5. Start & enable pdns.service
+#+begin_quote
+[!WARNING]
+Role interact with primary/master DNS instance. This roles doesn't aimed to initialise a secondary dns instance.
+#+end_quote
+*** Inventory
+#+begin_src yaml
+# For example idrac group
+idrac:
+  hosts:
+    idrac_serv1:
+      ansible_host: 192.168.1.10
+    idrac_serv2:
+      ansible_host: 192.168.1.28
+    idrac_serv3:
+      ansible_host: 192.168.1.33
+#+end_src
+*** Playboook
+#+begin_src yaml
+- name: Setup dns using pdns role
+  hosts: serv3
+  vars:
+    domains:
+      - idrac                   # Used for the Inventory example
+      - main
+      - printer
+      - side
+      - server
+      - homelab
+#+end_src
+*** Vars
+**** Defaults 
+#+begin_src yaml
+# Doc in meta/argument_specs.yaml
+ttl: 60
+domains:
+# domain_name: "{{ domains }}.cloud"
+bind_config_name: bind
+#+end_src
+**** Vars
+If you really want to modify =local_address= var reffer to note.
+
+#+begin_quote
+[!NOTE]
+For local addresses var reffer to that :
+local-address=127.0.0.1 - Listens only on the loopback interface (localhost).
+local-address=0.0.0.0 - Listens on all available IPv4 interfaces.
+local-address=192.168.1.10 - Listens on a specific private IP address.
+local-address=10.0.0.1 - Listens on a specific private IP address (common in cloud environments).
+#+end_quote
+#+begin_src yaml
+pdns_path: /etc/powerdns
+local_address: 0.0.0.0
+user_id: pdns
+group_id: pdns
+access: "0640"
+is_primary: yes
+is_secondary: none
+#+end_src

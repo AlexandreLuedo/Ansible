@@ -4,5 +4,4 @@ ttl: 60
 domains:
 # domain_name: "{{ domains }}.cloud"
 bind_config_name: bind
-
 ...
