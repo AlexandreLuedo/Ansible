@@ -4,7 +4,7 @@
 Aimed to generates config files using =Inventory.yaml= ressources.
 ** How it works
 *** Inventory
-Use machine to reffers VIP addresses
+Use host to reffers VIP addresses
 #+begin_src yaml
 main:
   hosts:
