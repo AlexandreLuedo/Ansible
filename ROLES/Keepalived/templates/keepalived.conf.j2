@@ -1,0 +1,22 @@
+#----------------------------------------------
+# File generatore by Ansible – {{ ansible_facts["date_time"]["iso8601"] }}
+# ---------------------------------------------
+# Dont touch with your hands, use Keepalived role instead.
+
+vrrp_instance VI_1 {
+        state {{ my_config.state }}
+        interface {{ ansible_default_ipv4["interface"] }}
+        virtual_router_id {{ virtual_router_id }}
+        priority {{ my_config.priority }}
+        advert_int 1
+        authentication {
+              auth_type {{ auth_type }}
+              auth_pass {{ auth_pass }}
+        }
+
+        virtual_ipaddress {
+{% for host in processus %}
+              {{ hostvars[host]['ansible_host'] }}/24 # y
+{% endfor %}
+        }
+}

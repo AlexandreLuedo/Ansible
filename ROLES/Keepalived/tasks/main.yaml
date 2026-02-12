@@ -1,0 +1,14 @@
+---
+- name: Install Keepalived
+  include_role:
+    name: "{{ role }}"
+    tasks_from: install.yaml
+- name: Deploy Keepalived
+  include_role:
+    name: "{{ role }}"
+    tasks_from: deploy_conf.yaml
+- name: Enable Keepalived
+  include_role:
+    name: "{{ role }}"
+    tasks_from: enable.yaml
+...

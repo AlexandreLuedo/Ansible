@@ -1,0 +1,12 @@
+---
+role: Keepalived
+power_nodes:
+  - hostname: "serv3"
+    role: "master"
+    state: MASTER
+    priority: 255
+  - hostname: "serv2"
+    role: "master"
+    state: BACKUP
+    priority: 254
+...

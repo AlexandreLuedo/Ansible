@@ -1,0 +1,13 @@
+---
+- name: Keepalived playbook aimed to distribute VIP
+  become: true
+  hosts:
+    - serv3
+  roles:
+    - Keepalived
+  vars:
+    processus:
+      - dns
+      - nextcloud
+      - immich
+...
