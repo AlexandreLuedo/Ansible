@@ -1,0 +1,68 @@
+argument_specs:
+  main:
+    short_description: "PKI Infrastructure Configuration"
+    description: "This role configures a Certificate Authority (PKI) and generates the necessary keys and directories."
+    options:
+      # --- Role execution ---
+      domains:
+        type: list
+        elements: str
+        default:
+          - main.cloud
+          - serv1.idrac.cloud
+          - serv2.idrac.cloud
+          - serv3.idrac.cloud
+          - umbrel.local
+        description: "List of domains for which the PKI must be configured."
+
+      # --- Organization infos ---
+      email_address:
+        type: str
+        description: "Contact email address embedded in the certificate. By default, it is derived from the current domain."
+
+      organization_name:
+        type: str
+        default: "none"
+        description: "Organization name for the certificate subject."
+
+      country_name:
+        type: str
+        default: "none"
+        description: "Country code (2 letters) for the certificate subject."
+
+      # --- Domains ---
+      current_domain:
+        type: str
+        description: "The main domain currently being processed."
+
+      pki_web_root:
+        type: path
+        default: "/var/www/pki"
+        description: "Path to the web root where CRLs or public certificates will be exposed."
+
+      # --- Key infos ---
+      key_size:
+        type: int
+        default: 4096
+        description: "Size of the private key in bits."
+
+      key_type:
+        type: str
+        default: "RSA"
+        choices:
+          - "RSA"
+          - "ECC"
+        description: "Type of encryption algorithm for the key."
+
+      key_mode:
+        type: str # 'str' is preferred for octal modes (e.g., '0600') to avoid integer conversion issues
+        default: "0600"
+        description: "File permissions for private keys."
+
+      key_usage:
+        type: list
+        elements: str
+        default:
+          - keyCertSign
+          - cRLSign
+        description: "List of key usages (Key Usage extensions)."
