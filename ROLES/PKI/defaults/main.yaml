@@ -1,10 +1,5 @@
 ---
 # Role execution
-role: New_PKI
-
-ca:
-  - root
-  - tls
 
 domains:
   - main.cloud
@@ -13,28 +8,6 @@ domains:
   - serv3.idrac.cloud
   - umbrel.local
 
-# Folders
-pki_path: /root/pki
-pki_dirs:
-  - path: "{{ pki_path}}/ca"
-  - path: "{{ pki_path }}/certs"
-  - path: "{{ pki_path }}/crl"
-
-  - path: "{{ pki_path}}/ca/root-ca"
-  - path: "{{ pki_path}}/ca/tls-ca"
-
-# root-ca
-  - path: "{{ pki_path }}/ca/root-ca/private"
-    mode: '0700'
-  - path: "{{ pki_path }}/ca/root-ca/db"
-  - path: "{{ pki_path }}/ca/root-ca/crl"
-
-# tls-ca
-  - path: "{{ pki_path }}/ca/tls-ca/private"
-    mode: '0700'
-  - path: "{{ pki_path }}/ca/tls-ca/db"
-  - path: "{{ pki_path }}/ca/tls-ca/crl"
- 
 # Organization infos
 email_address: "admin.{{ current_domain }}"
 organization_name: none

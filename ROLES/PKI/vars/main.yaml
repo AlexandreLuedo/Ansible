@@ -1,0 +1,29 @@
+---
+role: New_PKI # used for loops
+
+ca:
+  - root
+  - tls
+
+# Folders
+pki_path: /root/pki
+pki_dirs:
+  - path: "{{ pki_path}}/ca"
+  - path: "{{ pki_path }}/certs"
+  - path: "{{ pki_path }}/crl"
+
+  - path: "{{ pki_path}}/ca/root-ca"
+  - path: "{{ pki_path}}/ca/tls-ca"
+
+  # root-ca
+  - path: "{{ pki_path }}/ca/root-ca/private"
+    mode: "0700"
+  - path: "{{ pki_path }}/ca/root-ca/db"
+  - path: "{{ pki_path }}/ca/root-ca/crl"
+
+  # tls-ca
+  - path: "{{ pki_path }}/ca/tls-ca/private"
+    mode: "0700"
+  - path: "{{ pki_path }}/ca/tls-ca/db"
+  - path: "{{ pki_path }}/ca/tls-ca/crl"
+...
