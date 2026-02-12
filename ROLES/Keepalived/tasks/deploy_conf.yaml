@@ -1,13 +1,11 @@
 ---
 - name: Deploy master config
   ansible.builtin.template:
-    src: /templates/keepalived_conf.conf.j2
-    dest: "{{ keepalived_config_path }}/{{ current_power }}_keepalived.conf"
+    src: ~/INFOR/INFRA/ANSIBLE/ROLES/Keepalived/templates/keepalived.conf.j2
+    dest: "{{ keepalived_config_path }}/keepalived.conf"
     owner: root
     group: root
     mode: '0644'
-  loop: "{{ power }}"
-  loop_control:
-    loop_var: current_power
-
+  vars:
+    my_config: "{{ power_nodes | selectattr('hostname', 'equalto', inventory_hostname) | first }}"
 ...
