@@ -1,13 +1,7 @@
 ---
-keepalived_config_path: /etc/keepalived # Must be the nfs
-processus: none   # need to be used in playbook
-# Current_processus is the 2nd loop
-# Is a loop vars: current_processus use it with loop control :
-# loop: "{{ processus }}"
-# loop_control:
-#   loop_var: current_processus
-interface: eth0
+keepalived_config_path: /etc/keepalived
+processus:
 virtual_router_id: 51
 auth_type: PASS
-auth_pass: 54654                # Random number
+auth_pass: 54654
 ...
