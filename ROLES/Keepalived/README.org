@@ -1,0 +1,57 @@
+#+title: Readme
+#+LANGUAGE: EN
+* Keepalived role
+Aimed to generates config files using =Inventory.yaml= ressources.
+** How it works
+*** Inventory
+Use machine to reffers VIP addresses
+#+begin_src yaml
+main:
+  hosts:
+    ntp:
+      ansible_host: 10.1.0.1
+    dns:
+      ansible_host: 10.1.0.2
+    nfs:
+      ansible_host: 10.1.0.3
+    nextcloud:
+      ansible_host: 10.1.0.4
+    immich:
+      ansible_host: 10.1.0.5
+    forgejo:
+      ansible_host: 10.1.0.6
+    apt_mirrors:
+      ansible_host: 10.1.0.7
+#+end_src
+*** Playbooks
+Overload the =processus= var with your hosts groups
+#+begin_src yaml
+    processus:
+      - dns
+      - nextcloud
+      - immich
+#+end_src
+*** Vars
+**** Defaults
+#+begin_src yaml
+keepalived_config_path: /etc/keepalived
+processus:
+virtual_router_id: 51
+auth_type: PASS
+auth_pass: 54654
+#+end_src
+**** vars
+In fact, you can modify power nodes vars: for adding backup servers, by following the same =Inventory.yaml= device name.
+#+begin_src yaml
+power_nodes:
+  - hostname: "serv3"
+    role: "master"
+    state: MASTER
+    priority: 255
+  - hostname: "serv2"
+    role: "master"
+    state: BACKUP
+    priority: 254
+#+end_src
+This var: =role= is just here to less writing. But don't touch.
+
