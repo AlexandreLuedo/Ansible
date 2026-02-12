@@ -37,6 +37,8 @@ printer:
   hosts:
     HPD1BD80:
       ansible_host: 192.168.1.25
+
+# Here to add VIPs to processus
 main:
   hosts:
     ntp:
@@ -51,6 +53,9 @@ main:
       ansible_host: 10.1.0.5
     forgejo:
       ansible_host: 10.1.0.6
+    apt_mirrors:
+      ansible_host: 10.1.0.7
+
 side:
   hosts:
     ganache.lab:
