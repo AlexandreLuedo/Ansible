@@ -1,0 +1,9 @@
+---
+- name: Deploy server config
+  ansible.builtin.template:
+    src: ~/INFOR/INFRA/ANSIBLE/ROLES/mirrors/templates/server_mirror.list.j2
+    dest: "{{ apt_mirror_config_path }}/mirror.list"
+    owner: root
+    group: root
+    mode: '0644'
+...

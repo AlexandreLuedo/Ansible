@@ -1,0 +1,3 @@
+#+TITLE: Mirrors role
+* How it works
+  Use mirror with a vip. Use Keepalive role for that.

@@ -2,36 +2,36 @@
 idrac:
   hosts:
     idrac_serv1:
-      ansible_host: 192.168.1.10
+      ansible_host: 192.168.8.248
     idrac_serv2:
-      ansible_host: 192.168.1.28
+      ansible_host: 192.168.8.XX
     idrac_serv3:
-      ansible_host: 192.168.1.33
+      ansible_host: 192.168.8.64
 homelab:
   hosts:
     serv1:
-      ansible_host: 192.168.1.12
+      ansible_host: 192.168.8.246
       ansible_user: umbrel
 server:
   hosts:
     serv2:
-      ansible_host: 192.168.1.XX
+      ansible_host: 192.168.8.XX
     serv3:
-      ansible_host: 192.168.1.83
+      ansible_host: 192.168.8.264
       ansible_user: hadrien
 security:
   hosts:
     serv4:
-      ansible_host: 192.168.1.XX
+      ansible_host: 192.168.8.XX
 pc:
   hosts:
     pcomarchy:
-      ansible_host: 192.168.1.87
+      ansible_host: 192.168.8.228
       ansible_user: alexandre
     omarchy:
-      ansible_host: 192.168.1.XX
+      ansible_host: 192.168.8.XX
     macos:
-      ansible_host: 192.168.1.127
+      ansible_host: 192.168.8.115
       ansible_user: hadrienklotz
 printer:
   hosts:

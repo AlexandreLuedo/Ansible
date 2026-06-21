@@ -1,0 +1,6 @@
+---
+- name: Install apt-cached
+  include_role:
+    name: "{{ ansible_facts['ansible_role_name'] }}"
+    tasks_from: install.yaml
+...

@@ -1,0 +1,4 @@
+---
+apt_mirror_config_path: /etc/apt/
+days: 15
+...
