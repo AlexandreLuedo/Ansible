@@ -1,0 +1,14 @@
+---
+- name: Setup dns using pdns role
+  hosts: serv3
+  roles:
+    - pdns
+  vars:
+    domains:
+      - idrac # Used for the Inventory example
+      - main
+      - printer
+      - side
+      - server
+      - homelab
+... 
