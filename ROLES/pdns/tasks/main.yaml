@@ -1,0 +1,14 @@
+---
+- name: Deploy zone config
+  become: true
+  ansible.builtin.import_tasks: deploy_zone_file.yaml
+- name: Deploy bind config
+  become: true
+  ansible.builtin.import_tasks: deploy_bind_config.yaml
+- name: Deploy pdns config
+  become: true
+  ansible.builtin.import_tasks: deploy_pdns_config.yaml
+- name: Restart pdns
+  become: true
+  ansible.builtin.import_tasks: restart_pdns.yaml
+...
